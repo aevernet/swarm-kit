@@ -1,0 +1,24 @@
+{
+    "skip": {
+        "commit": true,
+        "tag": true
+    },
+    "types": [
+        {
+            "type": "feat",
+            "section": "Features"
+        },
+        {
+            "type": "fix",
+            "section": "Bug Fixes"
+        },
+        {
+            "type": "perf",
+            "section": "Improvements"
+        },
+        {
+            "type": "style",
+            "section": "Styling"
+        }
+    ]
+}

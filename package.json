@@ -1,0 +1,23 @@
+{
+    "name": "github",
+    "description": "Ragdata's Project Starter Template",
+    "version": "0.1.1",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Ragdata/.github"
+    },
+    "author": {
+        "name": "Darren Poulton (Ragdata)",
+        "email": "ragdata@users.noreply.github.com",
+        "url": "https://github.com/ragdata"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/ragdata/.github/issues"
+    },
+    "homepage": "https://github.com/ragdata/.github",
+    "scripts": {
+        "release": "bash scripts/bump.sh",
+        "setup": "bash scripts/setup.sh"
+    }
+}
