@@ -1,10 +1,10 @@
 {
-    "name": "github",
-    "description": "Ragdata's Project Starter Template",
-    "version": "0.1.1",
+    "name": "swarm-kit",
+    "description": "Aevernet's Self-Hosted Cookbook",
+    "version": "0.1.0",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Ragdata/.github"
+        "url": "git+https://github.com/aevernet/swarm-kit"
     },
     "author": {
         "name": "Darren Poulton (Ragdata)",
@@ -13,11 +13,10 @@
     },
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/ragdata/.github/issues"
+        "url": "https://github.com/aevernet/swarm-kit/issues"
     },
-    "homepage": "https://github.com/ragdata/.github",
+    "homepage": "https://github.com/aevernet/swarm-kit",
     "scripts": {
-        "release": "bash scripts/bump.sh",
-        "setup": "bash scripts/setup.sh"
+        "release": "bash scripts/bump.sh"
     }
 }
