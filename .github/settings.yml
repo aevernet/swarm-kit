@@ -23,7 +23,7 @@ repository:
     has_wiki: false
 
     # Either `true` to enable downloads for this repository, `false` to disable them.
-    has_downloads: false
+    has_downloads: true
 
     # Updates the default branch for this repository.
     default_branch: master
@@ -44,128 +44,143 @@ repository:
 labels:
 
     - name: 'BUG 🐞'
-      color: ff0000
+      color: "#ff0000"
       description: Something isn't working
 
     - name: 'DISCUSSION 💬'
-      color: cfd3d7
+      color: "#cfd3d7"
       description: Discussion Thread
 
     - name: 'DOCS 📘'
-      color: 0075ca
+      color: "#0075ca"
       description: Improvements or additions to documentation
 
     - name: 'EPIC 📌'
-      color: 7057ff
+      color: "#7057ff"
       description: Work unit containing sub-tasks
 
     - name: 'FEATURE 🚩'
-      color: 00ff00
+      color: "#00ff00"
       description: New feature or request
 
     - name: 'QUESTION ❓'
-      color: d876e3
+      color: "#d876e3"
       description: Support Question
 
     - name: 'REQUEST 🚧'
-      color: FBCA04
+      color: "#FBCA04"
       description: Feature request or suggestion
 
     - name: 'RESPONSE REQUIRED 🚨'
-      color: B60205
+      color: "#B60205"
       description: Response required by admin
 
     - name: 'good first issue'
-      color: 0052CC
+      color: "#0052CC"
       description: Good first issue for new contributor
 
     - name: 'help wanted'
-      color: 0E8A16
+      color: "#0E8A16"
       description: Extra attention is required
 
     - name: '💤 STALE'
-      color: C2E0C6
+      color: "#C2E0C6"
       description:
 
     - name: 'Priority: Critical ++'
-      color: B60205
-      description: ++
+      color: "#B60205"
+      description:
 
     - name: 'Priority: High +'
-      color: D93F0B
-      description: +
+      color: "#D93F0B"
+      description:
 
     - name: 'Priority: Medium ='
-      color: FBCA04
-      description: =
+      color: "#FBCA04"
+      description:
 
     - name: 'Priority: Low -'
-      color: 0E8A16
-      description: -
+      color: "#0E8A16"
+      description:
 
     - name: 'Priority: None --'
-      color: c5def5
-      description: --
+      color: "#c5def5"
+      description:
 
     - name: 'Status: Triage'
-      color: 5319E7
+      color: "#5319E7"
       description: (TRIAGE)
 
     - name: 'Status: Confirmed'
-      color: 0052CC
+      color: "#0052CC"
       description: (TODO)
 
     - name: 'Status: ToDo'
-      color: 0052CC
+      color: "#0052CC"
       description: (TODO)
 
     - name: 'Status: Blocked'
-      color: 000000
+      color: "#000000"
       description: (BLOCKED)
 
     - name: 'Status: Returned'
-      color: D93F0B
+      color: "#D93F0B"
       description: (REVIEWER RETURNED)
 
     - name: 'Status: In Progress'
-      color: FBCA04
+      color: "#FBCA04"
       description: (IN PROGRESS)
 
     - name: 'Status: Blocking'
-      color: B60205
+      color: "#B60205"
       description: (BLOCKING)
 
     - name: 'Status: For Review'
-      color: 006B75
+      color: "#006B75"
       description: (FOR REVIEW)
 
     - name: 'Status: Under Review'
-      color: 0E8A16
+      color: "#0E8A16"
       description: (UNDER REVIEW)
 
     - name: 'Status: To Merge'
-      color: F9D0C4
+      color: "#F9D0C4"
       description: (TO MERGE)
 
     - name: "Status: Can't Replicate"
-      color: D4C5F9
+      color: "#D4C5F9"
       description: (CLOSED)
 
     - name: 'Status: Duplicate'
-      color: D4C5F9
+      color: "#D4C5F9"
       description: (CLOSED)
 
     - name: "Status: Won't Fix"
-      color: D4C5F9
+      color: "#D4C5F9"
       description: (CLOSED)
 
     - name: 'Status: DONE'
-      color: 0E8A16
+      color: "#0E8A16"
       description: (DONE)
 
-# Collaborators: give specific users access to this repository.
-#collaborators:
-#    - username: bkeepers
+collaborators:
+
+    - username: Ragdata
+      permission: admin
+
+branches:
+
+    - name: master
+      protection:
+          required_pull_request_reviews: null
+          required_status_checks: null
+          enforce_admins: true
+          required_linear_history: true
+          restrictions: null
+
+          # Collaborators: give specific users access to this repository.
+          #collaborators:
+          #    - username: bkeepers
           # Note: Only valid on organization-owned repositories.
           # The permission to grant the collaborator. Can be one of:
           # * `pull` - can pull, but not push to or administer this repository.
