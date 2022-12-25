@@ -71,22 +71,22 @@ labels:
       color: "#FBCA04"
       description: Feature request or suggestion
 
-#    - name: 'RESPONSE REQUIRED 🚨'
-#      color: "#B60205"
-#      description: Response required by admin
-#
-#    - name: 'good first issue'
-#      color: "#0052CC"
-#      description: Good first issue for new contributor
-#
-#    - name: 'help wanted'
-#      color: "#0E8A16"
-#      description: Extra attention is required
-#
-#    - name: '💤 STALE'
-#      color: "#C2E0C6"
-#      description:
-#
+    - name: 'RESPONSE REQUIRED 🚨'
+      color: "#B60205"
+      description: Response required by admin
+
+    - name: 'good first issue'
+      color: "#0052CC"
+      description: Good first issue for new contributor
+
+    - name: 'help wanted'
+      color: "#0E8A16"
+      description: Extra attention is required
+
+    - name: '💤 STALE'
+      color: "#C2E0C6"
+      description:
+
 #    - name: 'Priority: Critical ++'
 #      color: "#B60205"
 #      description:
