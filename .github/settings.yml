@@ -87,26 +87,26 @@ labels:
       color: "#C2E0C6"
       description:
 
-#    - name: 'Priority: Critical ++'
-#      color: "#B60205"
-#      description:
-#
-#    - name: 'Priority: High +'
-#      color: "#D93F0B"
-#      description:
-#
-#    - name: 'Priority: Medium ='
-#      color: "#FBCA04"
-#      description:
-#
-#    - name: 'Priority: Low -'
-#      color: "#0E8A16"
-#      description:
-#
-#    - name: 'Priority: None --'
-#      color: "#c5def5"
-#      description:
-#
+    - name: 'Priority: Critical ++'
+      color: "#B60205"
+      description:
+
+    - name: 'Priority: High +'
+      color: "#D93F0B"
+      description:
+
+    - name: 'Priority: Medium ='
+      color: "#FBCA04"
+      description:
+
+    - name: 'Priority: Low -'
+      color: "#0E8A16"
+      description:
+
+    - name: 'Priority: None --'
+      color: "#c5def5"
+      description:
+
 #    - name: 'Status: Triage'
 #      color: "#5319E7"
 #      description: (TRIAGE)
