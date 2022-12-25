@@ -17,6 +17,6 @@
     },
     "homepage": "https://github.com/aevernet/swarm-kit",
     "scripts": {
-        "release": "bash scripts/bump.sh"
+        "release": "bash src/etc/bump.sh"
     }
 }

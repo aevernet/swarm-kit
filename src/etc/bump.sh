@@ -47,6 +47,7 @@ MESSAGE=""
 BRANCH=""
 
 FILES=(
+    "$baseDir/docs/index.md"
     "$baseDir/COPYRIGHT"
     "$baseDir/README.md"
     "$baseDir/package.json"
