@@ -119,34 +119,34 @@ labels:
       color: "#0052CC"
       description: (TODO)
 
-#    - name: 'Status: Blocked'
-#      color: "#000000"
-#      description: (BLOCKED)
-#
-#    - name: 'Status: Returned'
-#      color: "#D93F0B"
-#      description: (REVIEWER RETURNED)
-#
-#    - name: 'Status: In Progress'
-#      color: "#FBCA04"
-#      description: (IN PROGRESS)
-#
-#    - name: 'Status: Blocking'
-#      color: "#B60205"
-#      description: (BLOCKING)
-#
-#    - name: 'Status: For Review'
-#      color: "#006B75"
-#      description: (FOR REVIEW)
-#
-#    - name: 'Status: Under Review'
-#      color: "#0E8A16"
-#      description: (UNDER REVIEW)
-#
-#    - name: 'Status: To Merge'
-#      color: "#F9D0C4"
-#      description: (TO MERGE)
-#
+    - name: 'Status: Blocked'
+      color: "#000000"
+      description: (BLOCKED)
+
+    - name: 'Status: Returned'
+      color: "#D93F0B"
+      description: (REVIEWER RETURNED)
+
+    - name: 'Status: In Progress'
+      color: "#FBCA04"
+      description: (IN PROGRESS)
+
+    - name: 'Status: Blocking'
+      color: "#B60205"
+      description: (BLOCKING)
+
+    - name: 'Status: For Review'
+      color: "#006B75"
+      description: (FOR REVIEW)
+
+    - name: 'Status: Under Review'
+      color: "#0E8A16"
+      description: (UNDER REVIEW)
+
+    - name: 'Status: To Merge'
+      color: "#F9D0C4"
+      description: (TO MERGE)
+
 #    - name: "Status: Can't Replicate"
 #      color: "#D4C5F9"
 #      description: (CLOSED)
