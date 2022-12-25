@@ -107,18 +107,18 @@ labels:
       color: "#c5def5"
       description:
 
-#    - name: 'Status: Triage'
-#      color: "#5319E7"
-#      description: (TRIAGE)
-#
-#    - name: 'Status: Confirmed'
-#      color: "#0052CC"
-#      description: (TODO)
-#
-#    - name: 'Status: ToDo'
-#      color: "#0052CC"
-#      description: (TODO)
-#
+    - name: 'Status: Triage'
+      color: "#5319E7"
+      description: (TRIAGE)
+
+    - name: 'Status: Confirmed'
+      color: "#0052CC"
+      description: (TODO)
+
+    - name: 'Status: ToDo'
+      color: "#0052CC"
+      description: (TODO)
+
 #    - name: 'Status: Blocked'
 #      color: "#000000"
 #      description: (BLOCKED)
