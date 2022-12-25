@@ -147,21 +147,21 @@ labels:
       color: "#F9D0C4"
       description: (TO MERGE)
 
-#    - name: "Status: Can't Replicate"
-#      color: "#D4C5F9"
-#      description: (CLOSED)
-#
-#    - name: 'Status: Duplicate'
-#      color: "#D4C5F9"
-#      description: (CLOSED)
-#
-#    - name: "Status: Won't Fix"
-#      color: "#D4C5F9"
-#      description: (CLOSED)
-#
-#    - name: 'Status: DONE'
-#      color: "#0E8A16"
-#      description: (DONE)
+    - name: "Status: Can't Replicate"
+      color: "#D4C5F9"
+      description: (CLOSED)
+
+    - name: 'Status: Duplicate'
+      color: "#D4C5F9"
+      description: (CLOSED)
+
+    - name: "Status: Won't Fix"
+      color: "#D4C5F9"
+      description: (CLOSED)
+
+    - name: 'Status: DONE'
+      color: "#0E8A16"
+      description: (DONE)
 
 collaborators:
 
