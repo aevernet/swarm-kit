@@ -51,26 +51,26 @@ labels:
       color: "#cfd3d7"
       description: Discussion Thread
 
-#    - name: 'DOCS 📘'
-#      color: "#0075ca"
-#      description: Improvements or additions to documentation
-#
-#    - name: 'EPIC 📌'
-#      color: "#7057ff"
-#      description: Work unit containing sub-tasks
-#
-#    - name: 'FEATURE 🚩'
-#      color: "#00ff00"
-#      description: New feature or request
-#
-#    - name: 'QUESTION ❓'
-#      color: "#d876e3"
-#      description: Support Question
-#
-#    - name: 'REQUEST 🚧'
-#      color: "#FBCA04"
-#      description: Feature request or suggestion
-#
+    - name: 'DOCS 📘'
+      color: "#0075ca"
+      description: Improvements or additions to documentation
+
+    - name: 'EPIC 📌'
+      color: "#7057ff"
+      description: Work unit containing sub-tasks
+
+    - name: 'FEATURE 🚩'
+      color: "#00ff00"
+      description: New feature or request
+
+    - name: 'QUESTION ❓'
+      color: "#d876e3"
+      description: Support Question
+
+    - name: 'REQUEST 🚧'
+      color: "#FBCA04"
+      description: Feature request or suggestion
+
 #    - name: 'RESPONSE REQUIRED 🚨'
 #      color: "#B60205"
 #      description: Response required by admin
