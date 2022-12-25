@@ -10,3 +10,10 @@ v0.1.0
 ## Overview
 
 
+## Resources
+
+- [konstruktoid/hardening](https://github.com/konstruktoid/hardening)
+- [Ubuntu Secure Server](https://ostechnix.com/ubuntu-server-secure-script-secure-harden-ubuntu/)
+- [badsyntax/docker-box](https://github.com/badsyntax/docker-box)
+- [Script to create a docker swarm mode cluster](https://charmingwebdesign.com/script-to-create-a-docker-swarm-mode-cluster/)
+- [Bash-it](https://github.com/Bash-it/bash-it/tree/master/.github)
