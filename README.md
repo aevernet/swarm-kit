@@ -64,8 +64,15 @@ v0.1.0
 
 ## 👀 Overview
 
-<!-- Why did you create this project?  Explain your motivations, its purpose, your objectives, etc -->
+This collection of how-to documents and scripts will walk you through the process of setting up your very own, self-hosted, high-availability server infrastructure that - whether you do it as a hobby or in order to support your online business - will potentially save you hundreds if not _thousands_ of dollars each month in service subscriptions.
 
+This project will show you:
+
+- How to setup and maintain your own local 'cluster'
+- How to securely access your home-based services via the internet
+- How to install dozens of top-rated open-source applications
+- How to containerise your own applications
+- And much more!
 
 ## 📂 Installation
 
