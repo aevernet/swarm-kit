@@ -1,9 +1,7 @@
 <h1 align="center">
-<img src="https://raw.githubusercontent.com/aevernet/.github/master/images/banner/Aever-SW-D-800.png" alt="Aevernet">
+<img src="https://raw.githubusercontent.com/Ragdata/Ragdata/master/images/logo/banner/SK2-800x400.png" alt="Aevernet">
 
-Swarm-Kit
-
-v0.1.0
+<a href="https://github.com/aevernet/swarm-kit/releases/tag/v0.1.0">Swarm-Kit v0.1.0</a>
 
 </h1>
 
@@ -99,12 +97,11 @@ This project will show you:
 ## 🚧 Author / Maintainer
 
 <h3 align="center">
-<a href="https://github.com/ragdata" target="_blank"><img src="https://raw.githubusercontent.com/Ragdata/Ragdata/master/images/logo/banner/Social-SW-01-800.png" alt="RedEyed Software" />
+<a href="https://github.com/ragdata" target="_blank"><img src="https://raw.githubusercontent.com/Ragdata/Ragdata/master/images/logo/banner/RedEyed-SW-D-800.png" alt="RedEyed Software" />
 
-Ragdata's RedEyed Software</a>
+Created by: Darren Poulton (Ragdata)</a>
 
 </h3>
-
 
 [`^ Top`](#-table-of-contents)
 
