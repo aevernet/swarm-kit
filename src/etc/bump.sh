@@ -21,10 +21,8 @@
 #   - standard-version
 # ==================================================================
 
-if [[ -z "$baseDir" ]]; then
-    declare -gx baseDir
-    baseDir="$(dirname "$(dirname "$(realpath "$0")")")"
-fi
+# preserve $PWD
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
 
 set -eu
 
@@ -42,12 +40,11 @@ WORKING_BRANCH="$(git branch --show-current)"
 STAGING_BRANCH="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
 PROD_BRANCH="master"
 
-TYPE=""
+[[ -z "${1:-}" ]] && TYPE="patch" || TYPE="";
+
 MESSAGE=""
-BRANCH=""
 
 FILES=(
-    "$baseDir/docs/index.md"
     "$baseDir/COPYRIGHT"
     "$baseDir/README.md"
     "$baseDir/package.json"
@@ -58,31 +55,35 @@ TOOLS=(
     "standard-version"
 )
 
+VALID_OPTS=(
+    "preview"
+    "prerelease"
+    "first"
+    "patch"
+    "minor"
+    "major"
+)
+
 help() {
     echo
     echo "A script to release a new version of a project"
     echo
     echo "Usage:"
     echo
-    echo "      npm run release <options>"
+    echo "      npm run release -- <arg>"
     echo "- or -"
-    echo "      bash scripts/bump.sh <options>"
+    echo "      bash scripts/bump.sh <arg>"
     echo
-    echo "Options:"
-    echo "      -u, --user          Git user name       (optional)  Default: $USER_NAME"
-    echo "      -e, --email         Git user email      (optional)  Default: $USER_EMAIL"
-    echo "      -m, --message       Commit message      (optional)  Default: 'chore(release): release vX.X.X'"
-    echo "      -b, --branch        Git branch          (optional)  Default: master"
-    echo "      -t, --type          [patch|minor|major] (optional)  Default: patch"
-    echo "                              - The 'type' argument is a special one:"
-    echo "                                  - First Release: first-release"
-    echo "                                  - Pre-Release: prerelease [optional name] - eg: prerelease alpha = 1.0.0-alpha.0"
-    echo "                                  - Patch Release: patch"
-    echo "                                  - Minor Release: minor"
-    echo "                                  - Major Release: major"
-    echo "                                  - Force Version: release-as [prerelease|minor|major|X.X.X] (where X.X.X is a version number)"
-    echo "      -p, --preview       Preview Mode        (optional)  Default: false"
-    echo "                              - branches will not be modified"
+    echo "Arguments:"
+    echo "      The only argument you need to supply is a single string which defines the type of release you want to perform:"
+    echo "          - First Release: first"
+    echo "          - Pre-Release: prerelease"
+    echo "          - Patch Release: patch (Default)"
+    echo "          - Minor Release: minor"
+    echo "          - Major Release: major"
+    echo "          - Version Release: X.X.X"
+    echo "          - Preview Release: preview"
+    echo "              - branches will not be modified"
     echo
 }
 
@@ -148,10 +149,10 @@ bump() {
 }
 
 standardVersion() {
-    if [[ "$TYPE" == "preview" ]]; then
+    if [[ "$1" == "preview" ]]; then
         standard-version --prerelease rc
     else
-        standard-version "$TYPE"
+        standard-version --release-as "$1"
     fi
 }
 
@@ -162,7 +163,7 @@ standardVersionPlus() {
     git checkout -b "$temp_branch" "$PROD_BRANCH"
     git merge --no-ff --no-edit "$STAGING_BRANCH"
 
-    standardVersion
+    standardVersion "${1}"
 
     cp package.json CHANGELOG.md "$temp_dir"
 
@@ -198,9 +199,9 @@ main() {
     check
 
     if [[ "$WORKING_BRANCH" == "$STAGING_BRANCH" ]]; then
-        standardVersionPlus
+        standardVersionPlus "${TYPE}"
     else
-        standardVersion
+        standardVersion "${TYPE}"
     fi
 
     # change heading of patch version to level 2 (a bug from `standard-version`)
@@ -222,42 +223,22 @@ main() {
 while (($#)); do
     opt="$1"
     case "$opt" in
-        -u | --user)
-            USER_NAME="$opt"
-            shift
-            shift
-            ;;
-        -e | --email)
-            USER_EMAIL="$opt"
-            shift
-            shift
-            ;;
-        -t | --type)
-            TYPE="$opt"
-            shift
-            shift
-            ;;
-        -m | --msg | --message)
-            MESSAGE="$opt"
-            shift
-            shift
-            ;;
-        -b | --branch)
-            BRANCH="$opt"
-            shift
-            shift
-            ;;
-        -p | --preview)
-            TYPE="preview"
-            shift
-            ;;
-        -h | --help)
+        help)
             help
             exit 0
             ;;
         *)
-            help
-            exit 1
+            # shellcheck disable=SC2076
+            if [[ " ${VALID_OPTS[*]} " =~ " ${opt} " ]]; then
+                TYPE="${opt}"
+            elif [[ "${opt}" =~ \d\.\d\.\d ]]; then
+                TYPE=${opt}
+            else
+                echo "ERROR :: Invalid Argument '${opt}"
+                help
+                exit 1
+            fi
+            shift
             ;;
     esac
 done
