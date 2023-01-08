@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/elem/user
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/user
+# Author:       Ragdata
+# Date:         08/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+user-install()
+{
+    declare -a USERS
+
+    echoLog "spacer"
+
+    while [[ ! $ADDUSR =~ $RESP ]]
+    do
+        echo "As part of the process of making this system more robust and secure, it is advised that you create an 'administrative user' to use instead of the root account."
+        echo -en "Would you like to create an administrative user account now? ${DEFAULT_Y} "
+        read -n 1 -r ADDUSR
+        [[ -z "$ADDUSR" ]] && ADDUSR="Y";
+    done
+
+    if [[ $ADDUSR =~ $AFFIRM ]]; then
+        if [[ -z "${REGISTRY[SYSUSER]}" ]]; then
+            while [[ ! $SYSUSER =~ $USER_PASS ]]
+            do
+                echo -n "Please enter a username: "
+                read -r SYSUSER
+                SYSUSER="${SYSUSER,,}"
+            done
+            REGISTRY[SYSUSER]="$SYSUSER"
+        fi
+        USERS+=("${REGISTRY[SYSUSER]}")
+        echo
+        if [[ -z "${REGISTRY[SYSUSER_PASS]}" ]]; then
+            while [[ ! $SYSUSER_PASS =~ $USER_PASS ]]
+            do
+                echo -en "Please enter a password for the administrative user account: (enter '${WHITE}X${_0}' to auto-generate) "
+                read -r SYSUSER_PASS
+                [[ $SYSUSER_PASS == "X" || $SYSUSER_PASS == "x" ]] && SYSUSER_PASS="$(getPassword)"
+                echo
+            done
+            REGISTRY[SYSUSER_PASS]="${SYSUSER_PASS}"
+        fi
+
+        #[[ -z "${REGISTRY[SYSUSER_PASS_HASH]}" ]] && REGISTRY[SYSUSER_PASS_HASH]="$(echo "${REGISTRY[SYSUSER_PASS]}" | openssl passwd -1 -stdin)"
+
+        # write password to password file to be presented to user at the end of script execution
+        [[ ! -f "$PASSWORD" ]] && touch "$PASSWORD"
+        echo "${REGISTRY[SYSUSER]}:${REGISTRY[SYSUSER_PASS]}" >> "$PASSWORD"
+         
+    fi
+
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+user-config()
+{
+    echoLog "spacer"
+
+
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+user-remove()
+{
+    echoLog "spacer"
+
+
+
+    echoLog "spacer"
+}
