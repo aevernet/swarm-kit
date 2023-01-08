@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2129
+# ==================================================================
+# src/scripts/elem/wsl-init
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/wsl-init
+# Author:       Ragdata
+# Date:         08/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+wsl-init-install()
+{
+    echoLog "spacer"
+
+    echoLog "No install requirement"
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+wsl-init-config()
+{
+    echoLog "spacer"
+
+    echo "" >> /etc/wsl.conf
+    echo "[boot]" >> /etc/wsl.conf
+    echo "systemd=true" >> /etc/wsl.conf
+
+    # write a line to the user's .bashrc file to automatically
+    # execute wsl-init script upon returning from reboot
+    # wsl-init will automatically remove this line from .bashrc
+    # when it sees the "cont" argument being passed back in
+    echo "bash ${PWD}/src/bin/wsl-init.sh cont" >> "$HOME/.bashrc"
+
+    read -n 1 -s -r -p "WSL needs to reboot to complete the installation - press any key when ready: "
+
+    reboot
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+wsl-init-remove()
+{
+    echoLog "spacer"
+
+    echoLog "No remove requirement"
+
+    echoLog "spacer"
+}
