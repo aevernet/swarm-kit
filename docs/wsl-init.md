@@ -85,11 +85,15 @@ systemctl list-unit-files --type=service
 
 > 💡 TIP: This simple one-liner will return either **systemd** or **init** to let you know which service manager you're using
 >
-> `ps --no-headers -o comm 1`
+> ```shell
+> ps --no-headers -o comm 1
+> ```
 >
 > In this form it's really easy to use in scripts as well, like so:
 >
-> `[[ "$(ps --no-headers -o comm 1)" == "init" ]] && echo "Service Manager is Initd"`
+> ```shell
+> [[ "$(ps --no-headers -o comm 1)" == "init" ]] && echo "Service Manager is Initd"
+> ```
 
 
 ## Add Required APT Repositories
