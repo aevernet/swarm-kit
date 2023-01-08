@@ -62,7 +62,6 @@ fi
 
 # add required repositories
 loadSource "$ELEM/repos"
-# update apt database & upgrade packages
-apt update && apt upgrade -y
-
+# update apt database, upgrade packages, clear the table
+apt update && apt upgrade -y && apt autoremove && apt autoclean
 
