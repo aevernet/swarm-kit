@@ -88,6 +88,8 @@ If you aren't in a position to sponsor my work on a monthly basis, why not [buy 
 - [badsyntax/docker-box](https://github.com/badsyntax/docker-box)
 - [Script to create a docker swarm mode cluster](https://charmingwebdesign.com/script-to-create-a-docker-swarm-mode-cluster/)
 - [Bash-it](https://github.com/Bash-it/bash-it/tree/master/.github)
+- [CBL-Mariner](https://www.xda-developers.com/boot-cbl-mariner-microsoft-linux-distribution/)
+- [Book of Zeus](https://bookofzeus.com)
 
 
 [support]: https://github.com/sponsors/Ragdata
