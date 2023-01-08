@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# cfg/.defaults.dist
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         cfg/.defaults.dist
+# Author:       Ragdata
+# Date:         08/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+# Main configuration file for Swarm-Kit
+# Edit as necessary and copy to a file named '.defaults'
+# ==================================================================
+
+declare -Agx REGISTRY
+
+REGISTRY[TIMEZONE]="Australia/Brisbane"
+REGISTRY[GPG_EMAIL]="ragdata@users.noreply.github.com"
+REGISTRY[GIT_USER]='Ragdata'
+REGISTRY[GIT_EMAIL]='ragdata@users.noreply.github.com'
+REGISTRY[GIT_KEY]='id_git'
+REGISTRY[SYSUSER]=''
+REGISTRY[MYUSER]=''
+REGISTRY[EMAIL]='admin@aever.net'
