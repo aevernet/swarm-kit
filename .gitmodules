@@ -1,0 +1,3 @@
+[submodule "submodule/bash-bits"]
+	path = submodule/bash-bits
+	url = https://github.com/Ragdata/bash-bits
