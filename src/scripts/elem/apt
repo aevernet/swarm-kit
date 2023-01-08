@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/elem/apt
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/apt
+# Author:       Ragdata
+# Date:         08/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+apt-install()
+{
+    echoLog "spacer"
+
+    echoLog "Install function not available - did you forget to add the '-c' option?"
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+apt-config()
+{
+    echoLog "spacer"
+
+    if [[ -f /etc/apt/apt.conf.d/99force-ipv4 ]]; then
+        echoLog "Configuring apt - " -n
+        if echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
+    fi
+
+    aptInstall apt-transport-https apt-listchanges
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+apt-remove()
+{
+    echoLog "spacer"
+
+    echoLog "Remove function not available - did you forget to add the '-c' option?"
+
+    echoLog "spacer"
+}
