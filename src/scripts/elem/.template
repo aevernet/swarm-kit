@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/elem/.template
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/.template
+# Author:       Ragdata
+# Date:         08/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+template-install()
+{
+    echoLog "spacer"
+
+
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+template-config()
+{
+    echoLog "spacer"
+
+
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+template-remove()
+{
+    echoLog "spacer"
+
+
+
+    echoLog "spacer"
+}
