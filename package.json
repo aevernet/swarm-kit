@@ -17,6 +17,11 @@
     },
     "homepage": "https://github.com/aevernet/swarm-kit",
     "scripts": {
-        "release": "bash src/etc/bump.sh"
+        "release": "bash src/etc/bump.sh",
+        "bb-install": "bash submodules/bash-bits/src/bin/install.sh",
+        "wsl-init": "bash src/bin/wsl-init.sh",
+        "git-pull": "git pull --recurse-submodules",
+        "sub-push": "git submodule update --remote --merge",
+        "git-push": "git push --recurse-submodules=on-demand"
     }
 }
