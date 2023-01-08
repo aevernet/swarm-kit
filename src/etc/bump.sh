@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # ==================================================================
-# bump.sh
+# src/etc/bump.sh
 # ==================================================================
 # Bumps version, creates changelog, tags, and release.
 # Usage:
