@@ -42,6 +42,7 @@ repos-config()
     addRepo universe
     addRepo ppa:deadsnakes/ppa
     addRepo ppa:ondrej/php
+    addRepo ppa:landscape/19.10
 
     apt update
 
