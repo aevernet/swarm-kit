@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/elem/repos
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/repos
+# Author:       Ragdata
+# Date:         08/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+repos-install()
+{
+    echoLog "spacer"
+
+    echoLog "No install requirement"
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+repos-config()
+{
+    echoLog "spacer"
+
+    echoLog "Backing-up APT Sources List: " -n
+    if cp /etc/apt/sources.list /etc/apt/sources.list~; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
+
+    addRepo universe
+    addRepo ppa:deadsnakes/ppa
+    addRepo ppa:ondrej/php
+
+    apt update
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+repos-remove()
+{
+    echoLog "spacer"
+
+    echoLog "No remove requirement"
+
+    echoLog "spacer"
+}
