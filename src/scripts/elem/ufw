@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/elem/ufw
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/ufw
+# Author:       Ragdata
+# Date:         09/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+ufw-install()
+{
+    echoLog "spacer"
+
+    echoLog "Installing UFW"
+    aptInstall ufw
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+ufw-config()
+{
+    echoLog "spacer"
+
+    echoLog "Configuring UFW"
+    ufw default allow outgoing
+    ufw default deny incoming
+    ufw allow 2022
+
+    ufw enable
+
+    ufw status
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+ufw-remove()
+{
+    echoLog "spacer"
+
+    echoLog "Removing UFW"
+    aptRemove ufw
+
+    echoLog "spacer"
+}
