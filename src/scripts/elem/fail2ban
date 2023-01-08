@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/elem/fail2ban
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/fail2ban
+# Author:       Ragdata
+# Date:         09/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+fail2ban-install()
+{
+    echoLog "spacer"
+
+    echoLog "Installing Fail2Ban"
+    aptInstall fail2ban
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+fail2ban-config()
+{
+    echoLog "spacer"
+
+    echoLog "Configuring Fail2Ban"
+
+    service fail2ban status
+
+    cat << EOF > /etc/fail2ban/jail.local
+[DEFAULT]
+bantime = 8h
+ignoreip = 127.0.0.1/8
+ignoreself = true
+
+[sshd]
+enabled = true
+port = 2022
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3
+EOF
+
+    service fail2ban restart
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+fail2ban-remove()
+{
+    echoLog "spacer"
+
+    echoLog "Removing Fail2Ban"
+    aptRemove fail2ban
+
+    echoLog "spacer"
+}
