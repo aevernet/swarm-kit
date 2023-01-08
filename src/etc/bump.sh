@@ -47,6 +47,7 @@ MESSAGE=""
 FILES=(
     "$baseDir/COPYRIGHT"
     "$baseDir/README.md"
+    "$baseDir/docs/readme.md"
     "$baseDir/package.json"
 )
 
