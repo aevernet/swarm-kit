@@ -22,8 +22,12 @@ This project will show you:
 ## 📖 Table of Contents
 
 - [**Chapter 1 - Setting Up Your Cluster**](1-Cluster.md)
-  - [Setup WSL (Ubuntu)](wsl-init.md)
-  - [Setup Virtual Machines (Ubuntu)](vm-init.md)
+  - **Setup WSL2 (Ubuntu)**
+    - [Manual Instructions](wsl-init.md)
+    - [Automatic / Scripted](wsl-init-auto.md)
+  - **Setup Virtual Machines**
+    - [Manual Instructions](vm-init.md)
+    - [Automatic / Scripted](vm-init-auto.md)
 
 ## 📘 Introduction
 
