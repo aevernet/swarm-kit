@@ -118,4 +118,12 @@ apt update && apt upgrade -y
 
 ## Harden System
 
+
+
 ## Install Basic Services
+
+
+
+
+
+[upgrade-wsl]: https://devblogs.microsoft.com/commandline/a-preview-of-wsl-in-the-microsoft-store-is-now-available/#how-to-install-and-use-wsl-in-the-microsoft-store

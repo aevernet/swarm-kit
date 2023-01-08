@@ -75,6 +75,50 @@ This project will show you:
 
 ## 📂 Installation
 
+The first thing you'll need to do is clone a copy of this repository somewhere local to you.
+
+Then, you can choose whether or not you want to run the installer to make the code a part of your system.  NOTE:  This WILL NOT set up the whole show for you - this is just making sure the code is comfortable and easy to manage for what comes later.  If you intend to use the package for the foreseeable future, I recommend that you do the following:
+
+**Step 1.** Go to where you have saved your copy and enter the root directory of the repository.
+
+**Step 2.** Install the `Bash-Bits` package which is included as a submodule of the `Swarm-Kit` repo:
+
+```shell
+cd submodule/bash-bits
+```
+
+Install using NPM:
+
+```shell
+npm run install
+```
+
+Install using Bash:
+
+```shell
+bash src/bin/install.sh
+```
+
+**Step 3.** Return to the root directory of the `Swarm-Kit` repo and run its installer:
+
+```shell
+cd -
+```
+
+Using NPM:
+
+```shell
+npm run install
+```
+
+Using Bash:
+
+```shell
+bash src/bin/install.sh
+```
+
+### and HERE is where the fun really starts ...
+
 `Swarm-Kit` is a large project with a lot of moving parts.  Therefore, one of the most important parts of this project is its [Documentation](docs/readme.md).  There are 2 ways you can approach installing `Swarm-Kit`:
 
 1. **Manually**
