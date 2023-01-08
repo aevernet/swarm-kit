@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2154
 # ==================================================================
-# bin/wsl-init.sh
+# src/bin/wsl-init.sh
 # ==================================================================
 # Swarm-Kit - Self-Hosted Docker Swarm Cookbook
 #
-# File:         bin/wsl-init.sh
+# File:         src/bin/wsl-init.sh
 # Author:       Ragdata
 # Date:         08/01/2023
 # License:      MIT License
@@ -34,12 +34,17 @@ else
     exit 1
 fi
 
+TOOLS=(
+    "openssl"
+)
+
 # sanity checks
 checkBash
 checkRoot
+checkCMD
 
 # initialise logger
-logInit wsl-init
+logInit "$SK_LOG/wsl-init"
 
 # listen for continuation flag after reboot
 if [[ -n "$1" ]]; then
@@ -55,5 +60,9 @@ else
     fi
 fi
 
-loadSource "$SK_ELEM/repos"
+# add required repositories
+loadSource "$ELEM/repos"
+# update apt database & upgrade packages
+apt update && apt upgrade -y
+
 
