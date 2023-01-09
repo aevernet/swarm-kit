@@ -92,12 +92,6 @@ EOL
 
 [`^ Top`](#note)
 
-### Landscape
-
-
-
-[`^ Top`](#note)
-
 ### Network
 
 

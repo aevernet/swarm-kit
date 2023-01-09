@@ -9,10 +9,13 @@ Setting Up Your Cluster
 ## 📖 Chapter Contents
 
 - **Chapter 1 - Setting Up Your Cluster**
-    - **Setup WSL2 (Ubuntu) [Auto](1-vm-init-auto.md) / [Manual](1-wsl-init.md)**
-    - **Setup Virtual Machines [Auto](1-vm-init-auto.md) / [Manual](1-vm-init.md)**
-    - [**Basic Services**](1-basic-services.md)
-    - [**Primary Services**](1-primary-services.md)
+  - **Setup WSL2 (Ubuntu) [Auto](1-vm-init-auto.md) / [Manual](1-wsl-init.md)**
+  - **Setup Virtual Machines [Auto](1-vm-init-auto.md) / [Manual](1-vm-init.md)**
+  - [**Basic Services**](1-basic-services.md)
+  - [**Primary Services**](1-primary-services.md)
+    - [**Ceph**](pkgs/ceph.md)
+    - [**Docker**](pkgs/docker.md)
+    - [**Landscape**](pkgs/landscape.md)
 
 
 
