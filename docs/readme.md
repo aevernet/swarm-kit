@@ -99,6 +99,10 @@ If you aren't in a position to sponsor my work on a monthly basis, why not [buy 
 - [CBL-Mariner](https://www.xda-developers.com/boot-cbl-mariner-microsoft-linux-distribution/)
 - [Book of Zeus](https://bookofzeus.com)
 
+[`^ Top`](#-overview)
+
+
+[**<< Project Home**](https://github.com/aevernet/swarm-kit)  🔸  [**INDEX**](0-Index.md)  🔸  [**Index & Introduction >>**](0-Index.md)
 
 [support]: https://github.com/sponsors/Ragdata
 [facebook]: https://facebook.com/RedeyedSoftware
