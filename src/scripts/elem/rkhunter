@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/elem/rkhunter
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/rkhunter
+# Author:       Ragdata
+# Date:         09/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+rkhunter-install()
+{
+    echoLog "spacer"
+
+    aptInstall rkhunter
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+rkhunter-config()
+{
+    echoLog "spacer"
+
+    echoLog "Updating configuration files ..."
+    sed -i 's/UPDATE_MIRRORS.*/UPDATE_MIRRORS=1/' /etc/rkhunter.conf
+    sed -i 's/MIRRORS_MODE.*/MIRRORS_MODE=0/' /etc/rkhunter.conf
+    sed -i 's/WEB_CMD.*/WEB_CMD=""/' /etc/rkhunter.conf
+
+    sed -i 's/CRON_DAILY_RUN.*/CRON_DAILY_RUN="true"/' /etc/default/rkhunter
+    sed -i 's/CRON_DB_UPDATE.*/CRON_DB_UPDATE="true"/' /etc/default/rkhunter
+    sed -i 's/APT_AUTOGEN.*/APT_AUTOGEN="true"/' /etc/default/rkhunter
+
+    echoLog "Updating RKHunter: "
+    rkhunter --update
+
+    echoLog "Updating RKHunter Database: "
+    rkhunter --propupd
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+rkhunter-remove()
+{
+    echoLog "spacer"
+
+    aptRemove rkhunter
+
+    echoLog "spacer"
+}
