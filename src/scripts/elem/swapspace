@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/elem/swapspace
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/swapspace
+# Author:       Ragdata
+# Date:         09/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+swapspace-install()
+{
+    echoLog "spacer"
+
+    echoLog "No install requirement"
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+swapspace-config()
+{
+    echoLog "spacer"
+
+    echoLog "Checking available swapspace ..."
+    echoLog "spacer"
+
+    SWAP_TOTAL=$(awk '/^SwapTotal:/ {print $2}' /proc/meminfo)
+    SWAP_MiB=$(( SWAP_TOTAL / 1024))
+    SWAP_MB=$(awk -vr=$SWAP_MiB 'BEGIN{printf "%.0f", r * 1.049}')
+    SWAP_GiB=$(( SWAP_MB / 1024 ))
+    PRINT_SWAP_MiB=$(printf "%'d" $SWAP_MiB)
+    PRINT_SWAP_MB=$(printf "%'d" "$SWAP_MB")
+    PRINT_SWAP_GiB=$(printf "%'d" $SWAP_GiB)
+
+    echoLog "TOTAL SWAP: ${SWAP_TOTAL} (${PRINT_SWAP_MiB} MiB)\n"
+
+    echo -e -n "Do you want to configure swap space for this server? ${DEFAULT_Y} "
+    read -n 1 -r SWAPYN
+    [[ -z "$SWAPYN" ]] && SWAPYN="Y"
+
+    echoLog "spacer"
+
+    [[ "${SWAPYN}" == "n" ]] && { echoLog "User elected to not configure swapspace"; echoLog "spacer"; }
+
+    if [[ ! $SWAPYN =~ $NEGAT ]]; then
+        if [[ $SWAP_TOTAL -lt 4194000 ]]; then
+            if [[ $SWAP_TOTAL -gt 0 ]]; then
+                echoLog "There is currently ${PRINT_SWAP_MiB} MiB allocated swap space, but 5GiB is recommended\n"
+            fi
+            while [ -z "$SWAPSIZE" ]; do
+                echo -e -n "How much space do you want to allocate to swap? (in GiB - 5 is recommended): "
+                read -n 1 -r SWAPSIZE
+            done
+            [[ "$SWAPSIZE" -eq 0 ]] && return 0
+            echoLog "\nAttempting to allocate ${SWAPSIZE}GiB swap space\n"
+            # shellcheck disable=SC2207
+            PART=( $(df | awk '/\/$/ {print $1,$2,$3,$4,$5}') )
+            USED=${PART[-1]%?}
+            COMP=$(( PART[1] / 5 ))
+            SWAP_MiB=$(( SWAPSIZE * 1024 ))
+            SWAP_KB=$(( SWAP_MiB * 1049 ))
+            if [[ $USED -gt 75 ]] || [[ $COMP -lt $SWAP_KB ]]; then
+                errorExit "ERROR: Insufficient space available on primary partition to create required swap space!"
+            fi
+
+            echoLog "\nAllocating $SWAPSIZE GiB swap space ...\n"
+
+            fallocate -l "$SWAPSIZE"G /swapfile.sys
+            chmod 600 /swapfile.sys
+            mkswap /swapfile.sys
+            swapon /swapfile.sys
+
+            cp /etc/fstab /etc/fstab~
+
+            echo "/swapfile.sys           none            swap    sw                      0 0" >> /etc/fstab
+
+            echoLog "\nDONE!\n" --color=yellow
+
+            # re-test and ensure swapspace available
+            SWAP_TOTAL=$(awk '/^SwapTotal:/ {print $2}' /proc/meminfo)
+            SWAP_MiB=$(( TOTAL_SWAP / 1024))
+            SWAP_MB=$(awk -vr="${SWAP_MiB}" 'BEGIN{printf "%.0f", r * 1.049}')
+            SWAP_GiB=$(( SWAP_MiB / 1024 ))
+            PRINT_SWAP_MiB=$(printf "%'d" "${SWAP_MiB}")
+            PRINT_SWAP_MB=$(printf "%'d" "${SWAP_MB}")
+            PRINT_SWAP_GiB=$(printf "%'d" "${SWAP_GiB}")
+            echoLog "Allocated ${PRINT_SWAP_GiB} GiB (${PRINT_SWAP_MB} MB) swap space"
+            echoLog "spacer"
+
+        fi
+    fi
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+swapspace-remove()
+{
+    echoLog "spacer"
+
+    echoLog "No remove requirement"
+
+    echoLog "spacer"
+}
