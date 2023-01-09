@@ -12,3 +12,9 @@ Manually
 >   2. You want to make a few changes along the way
 >
 > You can find the quick and easy version [**here**](vm-init-auto.md)
+
+
+
+
+
+[**<< Chapter 1 - Cluster Setup**](1-Cluster.md)  🔸  [**INDEX**](0-Index.md)  🔸  [**Chapter 1 - Basic Services >>**](1-basic-services.md)

@@ -134,7 +134,7 @@ EOL
 
 [`^ Top`](#note)
 
-### COMPOSER
+### Composer
 
 
 
@@ -176,3 +176,4 @@ EOL
 
 [`^ Top`](#note)
 
+[**<< Chapter 1 - Cluster Setup**](1-Cluster.md)  🔸  [**INDEX**](0-Index.md)  🔸  [**Chapter 1 - VM Setup (Manual) >>**](1-vm-init.md)
