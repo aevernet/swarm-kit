@@ -25,9 +25,13 @@ This project is destined to be a **MONSTER** which gives you:
 
 Initially you'll see that this guide is written from the perspective of a Windows (10 or 11) user, but the majority of the action happens in Linux which can be run by literally _anyone_ without great difficulty or expense.  If you're not using Windows, you can probably skip the whole first chapter and jump right into the second - and you'll notice that I don't spend a whole lot of time at all discussing how to actually get to the point where you're installing Ubuntu on your virtual machines.  This is because there are a whole bunch of different ways to achieve this step, and how you get to this point is largely up to personal preference.  `Swarm-Kit` is really about what happens once you've got your virtualisation platform sorted out.
 
+[`^ Top`](#-overview)
+
 ### How will this benefit you?
 
 Even though we've had the benefit of container technologies for a few years now, I feel their full potential is not yet being exploited.  I hope that by making this guide available, I can help more people realise the fantastic resource that container technologies offer, and make them a little less scary and a little more available for those of you who don't have a lot of experience working with them.  The truth is that _every_ business can benefit from containerisation, and the impact they will have on your bottom line is not to be underestimated.
+
+[`^ Top`](#-overview)
 
 ### Who am I?
 
@@ -35,9 +39,13 @@ I'm Darren - and I use the nickname "Ragdata" online.
 
 At university I studied Machine Learning, and for the past 25 years I've worked as a software engineer exclusively using online technologies.  My first job out of university was helping to build the world's first content management system with integrated e-commerce capabilities at a time when even the banks in Australia weren't able to provide online payment services to local businesses.  I produced Australia's first-ever grocery shopping website in conjunction with GDM Wholesalers at the Rocklea Markets in Brisbane before Mark Zuckerberg had launched his "face-thing" site and while the Googlers were still working out of their garage.  Here in the background I helped to define the way that the world does business today, and I want to help more of you get your heads around the way we'll be powering the way we do business tomorrow.
 
+[`^ Top`](#-overview)
+
 ### What do I want from you?
 
 I want your [support][support] - either financially, as a customer, or as a member of one of the communities I'm building.
+
+[`^ Top`](#-overview)
 
 #### 💬 Get in Touch
 
@@ -48,6 +56,8 @@ You can get in touch with me through any of the following social media channels:
 - [Twitter][twitter]
 - [Patreon][patreon]
 - [Substack][substack]
+
+[`^ Top`](#-overview)
 
 #### ❤️ Sponsor Me
 
@@ -65,13 +75,19 @@ I'll receive:
 - Help paying for servers I rent to host content
 - Help paying for services I use to produce content
 
+[`^ Top`](#-overview)
+
 #### 🤝 Work with Me
 
 If you feel you could use my professional services, please [get in touch][email] and let me know how I can help
 
+[`^ Top`](#-overview)
+
 #### ☕ Buy me a Coffee
 
 If you aren't in a position to sponsor my work on a monthly basis, why not [buy me a coffee][one-off] with a one-off donation instead?
+
+[`^ Top`](#-overview)
 
 ## 🔗 Resources
 

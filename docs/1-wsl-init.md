@@ -17,6 +17,14 @@ Manually
 
 It is assumed that you're starting with a clean install of Ubuntu 20.04+ from the Window's Store.
 
+
+### Install NVM
+
+
+
+[`^ Top`](#prerequisites)
+
+
 ## Install "Bash Bits"
 
 `Bash Bits` is my modular library for Bash which has been written with WSL2 in mind.  It's included as a submodule of this repository, so you don't need to look very hard for it.  Installation is fully-automated, although you can make some configuration changes if you wish.  See the [**Bash Bits**](https://github.com/Ragdata/bash-bits) project documentation for details.
@@ -35,6 +43,8 @@ bash submodules/bash-bits/src/bin/install.sh
 
 And in one fell swoop, you've gained a bunch of useful aliases, functions, and dotfiles that you will one day wonder how you ever lived without.
 
+[`^ Top`](#prerequisites)
+
 ## Initial Environment Setup
 
 The very first thing you'll need to do is give your root user a password:
@@ -48,6 +58,8 @@ Then, switch to root privileges:
 ```shell
 su
 ```
+
+[`^ Top`](#prerequisites)
 
 ## Enable Systemd on WSL2
 
@@ -95,6 +107,17 @@ systemctl list-unit-files --type=service
 > [[ "$(ps --no-headers -o comm 1)" == "init" ]] && echo "Service Manager is Initd"
 > ```
 
+[`^ Top`](#prerequisites)
+
+## Fortify APT
+
+Before we get too far into it, we're going to make sure the `apt` package has everything it needs:
+
+```shell
+apt install -y apt-transport-https apt-listchanges
+```
+
+[`^ Top`](#prerequisites)
 
 ## Add Required APT Repositories
 
@@ -118,13 +141,17 @@ And if you plan on setting your WSL2 installation up as your Landscape Server (y
 add-apt-repository -y ppa:landscape/19.10
 ```
 
+[`^ Top`](#prerequisites)
+
 ## Update & Upgrade
 
-Now, update the apt database and upgrade everything to the lastest version:
+Now, update the apt database and upgrade everything to the lastest version and take out the trash:
 
 ```shell
-apt update && apt upgrade -y
+apt update && apt upgrade -y && apt autoremove && apt autoclean
 ```
+
+[`^ Top`](#prerequisites)
 
 ## Harden System
 
@@ -149,6 +176,8 @@ And because you've been clever and set your own user account up with all the ssh
 ```shell
 rsync --archive --chown=<username>:<username> ~/.ssh /home/<username>
 ```
+
+[`^ Top`](#prerequisites)
 
 ### 2. Configure A Firewall
 
@@ -279,6 +308,8 @@ You may want to spare just a moment to think about whether or not you are going 
 sed -i 's/X11Forwarding.*/#X11Forwarding no/' /etc/ssh/sshd_config
 ```
 
+[`^ Top`](#prerequisites)
+
 #### Enable 2FA (yes - on the command line)
 
 You should make a habit of this as it really does bring the security of your internet-exposed servers to a whole new level and only costs a _minuscule_ amount of time:
@@ -329,6 +360,8 @@ sudo service ssh restart
 
 Which is going to trash any SSH sessions you were logged in to, so cross your fingers that you haven't stuffed up and are going to be able to get back in just fine ...
 
+[`^ Top`](#prerequisites)
+
 ### 4. Secure `/tmp` and `/var/tmp`
 
 Temporary storage is often used by hackers to store malicious executables.
@@ -363,6 +396,8 @@ cp -prf /var/tmpold/* /tmp/
 rm -rf /var/tmpold/
 ```
 
+[`^ Top`](#prerequisites)
+
 ### 5. Set Security Limits
 
 A simple way to protect your system from fork bomb attacks is by setting a process limit for your users.
@@ -376,6 +411,8 @@ echo "${REGISTRY[SYSUSER]}  hard    nproc   100" >> /etc/security/limits.conf
 echo "${REGISTRY[MYUSER]}  hard    nproc   100" >> /etc/security/limits.conf
 ```
 
+[`^ Top`](#prerequisites)
+
 ### 6. Disable IP Spoofing
 
 IP Spoofing is what it's called when a hacker sends Internet Protocol (IP) packets with a forged source IP address, with the purpose of concealing their identity or to impersonate another, perhaps trusted, system:
@@ -384,6 +421,8 @@ IP Spoofing is what it's called when a hacker sends Internet Protocol (IP) packe
 sed -i 's/order hosts,bind/order bind,hosts/' /etc/host.conf
 echo "nospoof on" >> /etc/host.conf
 ```
+
+[`^ Top`](#prerequisites)
 
 ### 7. Install Fail2Ban
 
@@ -441,6 +480,8 @@ To remove a ban:
 sudo iptables -D fail2ban-ssh <chain number>
 ```
 
+[`^ Top`](#prerequisites)
+
 ### 8. Install AntiVirus
 
 Whether or not you need to install antivirus on Linux is a hotly debated topic in the Linux community.
@@ -484,6 +525,8 @@ EOF
 chmod +x /etc/cron.daily/freshclam
 ```
 
+[`^ Top`](#prerequisites)
+
 ### 9. Install Anti-RootKit
 
 One more front-line defence package you should consider is `rkhunter` which looks for rootkits.
@@ -515,6 +558,8 @@ To initiate a scan:
 rkhunter -C
 ```
 
+[`^ Top`](#prerequisites)
+
 ### [optional] Disable root account completely
 
 > There could be any number of reasons that you WOULDN'T complete this step, so I'm not going to bother to list any.  If you can't think of one right NOW though, you really need to do this ...
@@ -531,10 +576,14 @@ And, as promised, if you ever need to re-enable it:
 sudo passwd root
 ```
 
-## Install Basic Services
+[`^ Top`](#prerequisites)
+
+### Configure Swapspace
 
 
 
+[`^ Top`](#note)
 
+[**<< Chapter 1**](1-Cluster.md)  🔸  [**INDEX**](0-Index.md)  🔸  [**Basic Services >>**](1-basic-services.md)
 
 [upgrade-wsl]: https://devblogs.microsoft.com/commandline/a-preview-of-wsl-in-the-microsoft-store-is-now-available/#how-to-install-and-use-wsl-in-the-microsoft-store

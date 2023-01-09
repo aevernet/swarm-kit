@@ -14,5 +14,6 @@ v0.1.0
 - [**Chapter 1 - Setting Up Your Cluster**](1-Cluster.md)
     - **Setup WSL2 (Ubuntu) [Auto](1-vm-init-auto.md) / [Manual](1-wsl-init.md)**
     - **Setup Virtual Machines [Auto](1-vm-init-auto.md) / [Manual](1-vm-init.md)**
+    - [**Basic Services**](1-basic-services.md)
 
 ## 📂 Project Installation
