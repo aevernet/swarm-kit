@@ -66,51 +66,81 @@ main() {
     echoLog "line"
     echoLog "spacer"
 
-    echoLog "Creating Administrative User"
-    source "$PWD"/src/scripts/elem/user
-    user-install
+    if [[ -f "$ELEM"/user ]]; then
+        echoLog "Creating Administrative User"
+        source "$ELEM"/user
+        user-install
+    fi
 
-    source "$PWD"/src/scripts/elem/ufw
-    ufw-config
+    if [[ -f "$ELEM"/ufw ]]; then
+        source "$ELEM"/ufw
+        ufw-config
+    fi
 
-    source "$PWD"/src/scripts/elem/sshd
-    sshd-config
+    if [[ -f "$ELEM"/sshd ]]; then
+        source "$ELEM"/sshd
+        sshd-config
+    fi
 
-    source "$PWD"/src/scripts/elem/mfa
-    [[ ! command -v google-authenticator ]] && mfa-install
+    if [[ -f "$ELEM"/mfa ]]; then
+        source "$ELEM"/mfa
+        [[ ! command -v google-authenticator ]] && mfa-install
+        mfa-config
+    fi
 
-    echoLog "Securing Shared Memory"
-    echo ": /tmpdisk    /tmp    ext4    loop,nosuid,noexec,rw   0 0" >> /etc/fstab
+    if ! grep -q "/tmpdisk" /etc/fstab; then
+        echoLog "Securing /tmp"
+        fallocate -l 1G /tmpdisk
+        mkfs.ext4 /tmpdisk
+        chmod 0600 /tmpdisk
 
-    echoLog "Securing /tmp"
-    fallocate -l 1G /tmpdisk
-    mkfs.ext4 /tmpdisk
-    chmod 0600 /tmpdisk
+        mount -o loop,noexec,nosuid,rw /tmpdisk /tmp
+        chmod 1777 /tmp
 
-    mount -o loop,noexec,nosuid,rw /tmpdisk /tmp
-    chmod 1777 /tmp
+        echo "/tmpdisk    /tmp    ext4    loop,nosuid,noexec,rw   0 0" >> /etc/fstab
 
-    echo ": /tmpdisk    /tmp    ext4    loop,nosuid,noexec,rw   0 0" >> /etc/fstab
+        echoLog "Securing /var/tmp"
+        mv /var/tmp /var/tmpold
+        ln -s /tmp /var/tmp
+        cp -prf /var/tmpold/* /tmp/
+        rm -rf /var/tmpold/
+    fi
 
-    echoLog "Securing /var/tmp"
-    mv /var/tmp /var/tmpold
-    ln -s /tmp /var/tmp
-    cp -prf /var/tmpold/* /tmp/
-    rm -rf /var/tmpold/
+    if ! grep -q "${REGISTRY[SYSUSER]}" /etc/security/limits.conf; then
+        echoLog "Setting Process Limits"
+        echo "${REGISTRY[SYSUSER]}  hard    nproc   100" >> /etc/security/limits.conf
+        echo "${REGISTRY[MYUSER]}  hard    nproc   100" >> /etc/security/limits.conf
+    fi
 
-    echoLog "Setting Process Limits"
-    echo "${REGISTRY[SYSUSER]}  hard    nproc   100" >> /etc/security/limits.conf
-    echo "${REGISTRY[MYUSER]}  hard    nproc   100" >> /etc/security/limits.conf
+    if ! grep -q "nospoof" /etc/host.conf; then
+        echoLog "Disabling IP Spoofing"
+        sed -i 's/order hosts,bind/order bind,hosts/' /etc/host.conf
+        echo "nospoof on" >> /etc/host.conf
+    fi
 
-    echoLog "Disabling IP Spoofing"
-    sed -i 's/order hosts,bind/order bind,hosts/' /etc/host.conf
-    echo "nospoof on" >> /etc/host.conf
-
-    source "$PWD"/src/scripts/elem/fail2ban
+    source "$ELEM"/fail2ban
     fail2ban-install
     fail2ban-config
 
+    while [[ ! $ADDAV =~ $RESP ]]
+    do
+        echo -en "Do you want to install AntiVirus on this system? ${DEFAULT_N} "
+        read -n 1 -r ADDAV
+        [[ -z "$ADDAV" ]] && ADDAV="N"
+    done
+    echo
+    if [[ $ADDAV =~ $AFFIRM ]]; then
+        source "$ELEM"/clamav
+        clamav-install
+        clamav-config
+    fi
 
+    source "$ELEM"/rkhunter
+    rkhunter-install
+    rkhunter-config
+
+    # Finally, do a sweep for dangerous services just to be sure:
+    apt --purge remove -y xinetd nis yp-tools tftpd atftpd tftpd-hpa telnetd rsh-server rsh-redone-server
 }
 
 options=$(getopt -l "help" -o "h" -a -- "$@")
