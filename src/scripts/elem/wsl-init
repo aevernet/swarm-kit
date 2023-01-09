@@ -36,9 +36,10 @@ wsl-init-config()
 {
     echoLog "spacer"
 
-    echo "" >> /etc/wsl.conf
-    echo "[boot]" >> /etc/wsl.conf
-    echo "systemd=true" >> /etc/wsl.conf
+    if ! -f /etc/wsl.conf || ! grep -q "systemd=true" /etc/wsl.conf; then
+        echo "[boot]" >> /etc/wsl.conf
+        echo "systemd=true" >> /etc/wsl.conf
+    fi
 
     # write a line to the user's .bashrc file to automatically
     # execute wsl-init script upon returning from reboot
