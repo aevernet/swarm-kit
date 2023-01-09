@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2154
+# ==================================================================
+# src/scripts/elem/git
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/git
+# Author:       Ragdata
+# Date:         09/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+git-install()
+{
+    echoLog "spacer"
+
+    aptInstall git
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+git-config()
+{
+    echoLog "spacer"
+
+    if [[ -z "${REGISTRY[GIT_USER]}" ]]; then
+        while [[ ! $GIT_USER =~ $USER_PASS ]]
+        do
+            echo -n "Enter your git username: "
+            read -r GIT_USER
+            echo
+        done
+        REGISTRY[GIT_USER]="$GIT_USER"
+    fi
+
+    if [[ -z "${REGISTRY[GIT_EMAIL]}" ]]; then
+        while [[ ! $GIT_EMAIL =~ $isEmail ]]
+        do
+            echo -n "Enter your git email address: "
+            read -r GIT_EMAIL
+            echo
+        done
+        REGISTRY[GIT_EMAIL]="$GIT_EMAIL"
+    fi
+
+    echoLog "git user.name '${REGISTRY[GIT_USER]}': " -n
+    if git config --global user.name "${REGISTRY[GIT_USER]}"; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
+
+    echoLog "git user.email '${REGISTRY[GIT_EMAIL]}': " -n
+    if git config --global user.email "${REGISTRY[GIT_EMAIL]}"; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+git-remove()
+{
+    echoLog "spacer"
+
+    aptRemove git
+
+    echoLog "spacer"
+}
