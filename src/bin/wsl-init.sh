@@ -55,7 +55,7 @@ if [[ -n "$1" ]]; then
 else
     if [[ "$(ps --no-headers -o comm 1)" == "init" ]]; then
         # on first execution, call the function which enables systemd for WSL2
-        source "$PWD/src/scripts/elem/wsl-init"
+        source "$ELEM/wsl-init"
         wsl-init-config
     fi
 fi
@@ -63,5 +63,7 @@ fi
 # add required repositories
 loadSource "$ELEM/repos"
 # update apt database, upgrade packages, clear the table
-apt update && apt upgrade -y && apt autoremove && apt autoclean
+apt upgrade -y && apt autoremove && apt autoclean
 
+# harden the system
+bash "$SK_BIN"/harden.sh
