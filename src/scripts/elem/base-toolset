@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/elem/base-toolset
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/base-toolset
+# Author:       Ragdata
+# Date:         09/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+base-toolset-install()
+{
+    echoLog "spacer"
+
+    aptInstall gnupg2 snapd daemon libsqlite3-dev sqlite3 mcrypt screen ca-certificates
+    aptInstall software-properties-common id-utils uuid arj bzip2 nomarch lzop unzip zip
+    aptInstall cabextract libyaml-dev libxml2-dev libxslt1-dev debconf-utils binutils
+    aptInstall zlib1g-dev build-essential libssl-dev libreadline-dev libcurl4-openssl-dev
+    aptInstall libffi-dev libgdbm-dev libncurses5-dev automake libtool bison ffmpeg certbot
+    aptInstall python3-certbot-nginx htop telegram-cli lvm2 moreutils
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+base-toolset-config()
+{
+    echoLog "spacer"
+
+    echoLog "No config requirement"
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+base-toolset-remove()
+{
+    echoLog "spacer"
+
+    aptRemove gnupg2 snapd daemon libsqlite3-dev sqlite3 mcrypt screen ca-certificates
+    aptRemove software-properties-common id-utils uuid arj bzip2 nomarch lzop unzip zip
+    aptRemove cabextract libyaml-dev libxml2-dev libxslt1-dev debconf-utils binutils
+    aptRemove zlib1g-dev build-essential libssl-dev libreadline-dev libcurl4-openssl-dev
+    aptRemove libffi-dev libgdbm-dev libncurses5-dev automake libtool bison ffmpeg certbot
+    aptRemove python3-certbot-nginx htop telegram-cli lvm2 moreutils
+
+    echoLog "spacer"
+}
