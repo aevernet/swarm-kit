@@ -40,7 +40,7 @@ ufw-config()
     echoLog "Configuring UFW"
     ufw default allow outgoing
     ufw default deny incoming
-    ufw allow 2022
+    ufw allow 2022/tcp
 
     ufw enable
 
