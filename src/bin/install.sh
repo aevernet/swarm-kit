@@ -68,10 +68,17 @@ createPaths() {
     [[ ! -d "$SK_BIN" ]] && mkdir -p "$SK_BIN"
     [[ ! -d "$SK_ETC" ]] && mkdir -p "$SK_ETC"
     [[ ! -d "$SK_OPT" ]] && mkdir -p "$SK_OPT"
+    [[ ! -d "$SK_LOG" ]] && mkdir -p "$SK_LOG"
 
     # create sk paths
-    [[ ! -d "$SK_LOG" ]] && mkdir -p "$SK_LOG"
+    [[ ! -d "$CFGDIR" ]] && mkdir -p "$CFGDIR"
+    [[ ! -d "$INCDIR" ]] && mkdir -p "$INCDIR"
     [[ ! -d "$REGDIR" ]] && mkdir -p "$REGDIR"
+    [[ ! -d "$DOCDIR" ]] && mkdir -p "$DOCDIR"
+    [[ ! -d "$PKGDIR" ]] && mkdir -p "$PKGDIR"
+    [[ ! -d "$SCRIPTS" ]] && mkdir -p "$SCRIPTS"
+    [[ ! -d "$STACKS" ]] && mkdir -p "$STACKS"
+    [[ ! -d "$ELEM" ]] && mkdir -p "$ELEM"
 }
 
 writeEnv() {
@@ -82,14 +89,20 @@ SK_LIB='$SK_LIB'
 SK_BIN='$SK_BIN'
 SK_ETC='$SK_ETC'
 SK_OPT='$SK_OPT'
-# SK PATHS
-DOCDIR='$DOCDIR'
-REGDIR='$REGDIR'
 SK_LOG='$SK_LOG'
+# SK PATHS
+CFGDIR='$CFGDIR'
+INCDIR='$INCDIR'
+REGDIR='$REGDIR'
+DOCDIR='$DOCDIR'
 SCRIPTS='$SK_OPT/scripts'
-ELEM='$SCRIPTS/elem'
 STACKS='$SK_OPT/stacks'
+ELEM='$SCRIPTS/elem'
+PKGDIR='$PKGDIR'
 # FILE PATHS
+DEF='$DEF'
+DIS='$DIS'
+NET='$NET'
 PASSWORD='$PASSWORD'
 EOF
 
@@ -159,42 +172,33 @@ main() {
 
     echoLog "spacer"
     echoLog "separator"
-    echoLog "Installing script files"
+    echoLog "Installing config files"
     echoLog "separator"
-    for file in "$PWD"/src/scripts/*
+    for file in "$PWD"/cfg/*
     do
         if [[ -f "$file" ]]; then
             echoLog "$file"
-            sudo install -m 775 -g root -o root "$file" "$SCRIPTS/$file"
+            sudo install -m 775 -g root -o root "$file" "$CFGDIR/$file"
         fi
     done
 
     echoLog "spacer"
     echoLog "separator"
-    echoLog "Installing elem files"
+    echoLog "Installing inc files"
     echoLog "separator"
-    for file in "$PWD"/src/scripts/elem/*
+    for file in "$PWD"/inc/*
     do
         if [[ -f "$file" ]]; then
             echoLog "$file"
-            sudo install -m 775 -g root -o root "$file" "$ELEM/$file"
-        fi
-    done
-
-    echoLog "spacer"
-    echoLog "separator"
-    echoLog "Installing stack files"
-    echoLog "separator"
-    for dir in "$PWD"/src/scripts/stacks/*
-    do
-        if [[ -d "$dir" ]]; then
+            sudo install -m 777 -g root -o root "$file" "$INCDIR/$file"
+        elif [[ -d "$file" ]]; then
             echoLog "spacer"
-            echoLog "$dir"
+            echoLog "$file"
             echoLog "separator"
-            for file in "$PWD"/src/scripts/stacks/"$dir"/*
+            for inc in "$PWD"/inc/"$file"/*
             do
-                echoLog "$file"
-                sudo install -m 775 -g root -o root "$file" "$STACKS/$dir/$file"
+                echoLog "$inc"
+                sudo install -m 777 -g root -o root "$doc" "$INCDIR/$file/$inc"
             done
         fi
     done
@@ -217,6 +221,60 @@ main() {
                 echoLog "$doc"
                 sudo install -m 777 -g root -o root "$doc" "$DOCDIR/$file/$doc"
             done
+        fi
+    done
+
+#    echoLog "spacer"
+#    echoLog "separator"
+#    echoLog "Installing script files"
+#    echoLog "separator"
+#    for file in "$PWD"/src/scripts/*
+#    do
+#        if [[ -f "$file" ]]; then
+#            echoLog "$file"
+#            sudo install -m 775 -g root -o root "$file" "$SCRIPTS/$file"
+#        fi
+#    done
+
+    echoLog "spacer"
+    echoLog "separator"
+    echoLog "Installing stack files"
+    echoLog "separator"
+    for dir in "$PWD"/src/scripts/stacks/*
+    do
+        if [[ -d "$dir" ]]; then
+            echoLog "spacer"
+            echoLog "$dir"
+            echoLog "separator"
+            for file in "$PWD"/src/scripts/stacks/"$dir"/*
+            do
+                echoLog "$file"
+                sudo install -m 775 -g root -o root "$file" "$STACKS/$dir/$file"
+            done
+        fi
+    done
+
+    echoLog "spacer"
+    echoLog "separator"
+    echoLog "Installing element files"
+    echoLog "separator"
+    for file in "$PWD"/src/scripts/elem/*
+    do
+        if [[ -f "$file" ]]; then
+            echoLog "$file"
+            sudo install -m 775 -g root -o root "$file" "$ELEM/$file"
+        fi
+    done
+
+    echoLog "spacer"
+    echoLog "separator"
+    echoLog "Installing package files"
+    echoLog "separator"
+    for file in "$PWD"/src/scripts/pkgs/*
+    do
+        if [[ -f "$file" ]]; then
+            echoLog "$file"
+            sudo install -m 775 -g root -o root "$file" "$PKGDIR/$file"
         fi
     done
 
