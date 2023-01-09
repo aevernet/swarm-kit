@@ -36,21 +36,37 @@ sshd-config()
 {
     echoLog "spacer"
 
+    echoLog "Backing up original SSH configuration"
+    cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
+
     echoLog "Configuring SSHD"
 
     sed -i 's/#Port 22/Port 2022/' /etc/ssh/sshd_config
     sed -i 's/#PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
-    sed -i 's/#PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+    sed -i 's/#LogLevel.*/LogLevel VERBOSE/' /etc/ssh/sshd_config
+    sed -i 's/ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/' /etc/ssh/sshd_config
+    sed -i 's/PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+    sed -i 's/#KerberosAuthentication.*/KerberosAuthentication no/' /etc/ssh/sshd_config
+    sed -i 's/#GSSAPIAuthentication.*/GSSAPIAuthentication no/' /etc/ssh/sshd_config
+    sed -i 's/#PermitEmptyPasswords.*/PermitEmptyPasswords no/' /etc/ssh/sshd_config
+    sed -i 's/#IgnoreRhosts.*/IgnoreRhosts yes/' /etc/ssh/sshd_config
+    sed -i 's/#HostBasedAuthentication.*/HostBasedAuthentication no/' /etc/ssh/sshd_config
     sed -i 's/#TCPKeepAlive.*/TCPKeepAlive yes/' /etc/ssh/sshd_config
     sed -i 's/#ClientAliveInterval.*/ClientAliveInterval 60/' /etc/ssh/sshd_config
     sed -i 's/#ClientAliveCountMax.*/ClientAliveCountMax 3/' /etc/ssh/sshd_config
+    sed -i 's/#LoginGraceTime.*/LoginGraceTime 300/' /etc/ssh/sshd_config
     sed -i 's/#MaxAuthTries.*/MaxAuthTries 3/' /etc/ssh/sshd_config
     sed -i 's/X11Forwarding.*/#X11Forwarding no/' /etc/ssh/sshd_config
 
-    echo >> /etc/ssh/sshd_config
-    echo "Protocol 2" >> /etc/ssh/sshd_config
-    echo >> /etc/ssh/sshd_config
-    echo "AllowUsers ${REGISTRY[SYSUSER]} ${REGISTRY[MYUSER]}" >> /etc/ssh/sshd_config
+    if ! grep -q "Protocol 2" /etc/ssh/sshd_config; then
+        echo >> /etc/ssh/sshd_config
+        echo "Protocol 2" >> /etc/ssh/sshd_config
+    fi
+
+    if ! grep -q "${REGISTRY[SYSUSER]}" /etc/ssh/sshd_config; then
+        echo >> /etc/ssh/sshd_config
+        echo "AllowUsers ${REGISTRY[SYSUSER]} ${REGISTRY[MYUSER]}" >> /etc/ssh/sshd_config
+    fi
 
     service ssh restart
 
