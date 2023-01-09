@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/elem/timezone
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/timezone
+# Author:       Ragdata
+# Date:         09/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+timezone-install()
+{
+    echoLog "spacer"
+
+    echoLog "No install requirement"
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+timezone-config()
+{
+    echoLog "spacer"
+
+    if [[ -z "${REGISTRY[TIMEZONE]}" ]]; then
+        while [[ ! -f /usr/share/zoneinfo/"$TZ" ]]
+        do
+            echo -en "Please enter your preferred timezone: (${DM}UTC${_0}) "
+            read -r TZ
+            [[ -z "$TZ" ]] && TZ="UTC"
+            echo
+        done
+        REGISTRY[TIMEZONE]="$TZ"
+    fi
+
+    echoLog "Setting Timezone to '${REGISTRY[TIMEZONE]}': " -n
+    if timedatectl set-timezone "${REGISTRY[TIMEZONE]}"; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+timezone-remove()
+{
+    echoLog "spacer"
+
+    echoLog "No remove requirement"
+
+    echoLog "spacer"
+}
