@@ -309,7 +309,7 @@ google-authenticator
 
 Time-based tokens - y
 
-After answering yes to the first question you'll be presented with a QR code and backup codes.  Open Google Authenticator on your Android/iPhone and scan the QR code ... also, stash those emergency codes somewhere SAFE (AND NO - DO NOT LOSE THEM!!) 😡 << so you know I'm deadly serious and NOT joking ... stop laughing ...
+After answering yes to the first question you'll be presented with a QR code and backup codes.  Open Google Authenticator on your Android/iPhone and scan the QR code ... also, stash those emergency codes somewhere SAFE (**AND NO - DO NOT LOSE THEM!!**) 😡 (<< so you know I'm deadly serious and NOT joking ... stop laughing ...)
 
 update.google-authenticator - y
 
@@ -329,15 +329,7 @@ sudo service ssh restart
 
 Which is going to trash any SSH sessions you were logged in to, so cross your fingers that you haven't stuffed up and are going to be able to get back in just fine ...
 
-### 4. Secure Shared Memory
-
-Shared memory can be exploited in an attack against a running service such as apache2 or httpd:
-
-```shell
-echo ": tmpfs /run/shm      tmpfs       ro,noexec,nosuid        0 0" >> /etc/fstab
-```
-
-### 5. Secure `/tmp` and `/var/tmp`
+### 4. Secure `/tmp` and `/var/tmp`
 
 Temporary storage is often used by hackers to store malicious executables.
 
@@ -371,7 +363,7 @@ cp -prf /var/tmpold/* /tmp/
 rm -rf /var/tmpold/
 ```
 
-### 6. Set Security Limits
+### 5. Set Security Limits
 
 A simple way to protect your system from fork bomb attacks is by setting a process limit for your users.
 
@@ -384,7 +376,7 @@ echo "${REGISTRY[SYSUSER]}  hard    nproc   100" >> /etc/security/limits.conf
 echo "${REGISTRY[MYUSER]}  hard    nproc   100" >> /etc/security/limits.conf
 ```
 
-### 7. Disable IP Spoofing
+### 6. Disable IP Spoofing
 
 IP Spoofing is what it's called when a hacker sends Internet Protocol (IP) packets with a forged source IP address, with the purpose of concealing their identity or to impersonate another, perhaps trusted, system:
 
@@ -393,11 +385,135 @@ sed -i 's/order hosts,bind/order bind,hosts/' /etc/host.conf
 echo "nospoof on" >> /etc/host.conf
 ```
 
-### 8. Install Fail2Ban
+### 7. Install Fail2Ban
 
-### 9. Install AntiVirus
+`Fail2Ban` is an intrusion detection system which monitors system logs looking for unusual behaviour and failed login attempts.  If it detects multiple failed logins it will blacklist the IP address from which those requests originate.
 
-### 10. Install Anti-RootKit
+To install `Fail2Ban`:
+
+```shell
+apt install -y fail2ban
+```
+
+Check service status:
+
+```shell
+service fail2ban status
+```
+
+`Fail2Ban` uses 'jail' files to store configuration.  Global config is in `/etc/fail2ban/jail.conf`.
+
+We'll create a local config file at `/etc/fail2ban/jail.local`:
+
+```shell
+cat << EOF > /etc/fail2ban/jail.local
+[DEFAULT]
+bantime = 8h
+ignoreip = 127.0.0.1/8 xxx.xxx.xxx.xxx
+ignoreself = true
+
+[sshd]
+enabled = true
+port = 2022
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3
+EOF
+```
+
+If you have a local static IP that you use to connect to your system, insert it in place of the `xxx.xxx.xxx.xxx` - otherwise leave it blank.
+
+Restart `Fail2Ban`:
+
+```shell
+service fail2ban restart
+```
+
+To list banned IP's:
+
+```shell
+sudo iptables -L f2b-sshd --line-numbers
+```
+
+To remove a ban:
+
+```shell
+sudo iptables -D fail2ban-ssh <chain number>
+```
+
+### 8. Install AntiVirus
+
+Whether or not you need to install antivirus on Linux is a hotly debated topic in the Linux community.
+
+You should assess your level of risk, and your system's workload to help you decide if you need to install AV.
+
+Here we're installing ClamAV which is a free, open-source AV for Linux:
+
+```shell
+apt install -y clamav clamav-daemon
+```
+
+To update it, we first need to stop the service:
+
+```shell
+systemctl stop clamav-freshclam
+```
+
+Update like so:
+
+```shell
+freshclam
+```
+
+And then restart and enable the service once the initial update is complete:
+
+```shell
+systemctl start clamav-freshclam
+systemctl enable clamav-freshclam
+```
+
+So we don't have to think about it ever again, we'll set up a cron job to take care of daily updates:
+
+```shell
+cat << EOF > /etc/cron.daily/freshclam
+#!/usr/bin/env bash
+/usr/bin/freshclam --quiet
+exit 0
+EOF
+
+chmod +x /etc/cron.daily/freshclam
+```
+
+### 9. Install Anti-RootKit
+
+One more front-line defence package you should consider is `rkhunter` which looks for rootkits.
+
+To install:
+
+```shell
+apt install rkhunter
+```
+
+A little surgical strike to take care of configuration:
+
+```shell
+sed -i 's/UPDATE_MIRRORS.*/UPDATE_MIRRORS=1/' /etc/rkhunter.conf
+sed -i 's/MIRRORS_MODE.*/MIRRORS_MODE=0/' /etc/rkhunter.conf
+sed -i 's/WEB_CMD.*/WEB_CMD=""/' /etc/rkhunter.conf
+
+sed -i 's/CRON_DAILY_RUN.*/CRON_DAILY_RUN="true"/' /etc/default/rkhunter
+sed -i 's/CRON_DB_UPDATE.*/CRON_DB_UPDATE="true"/' /etc/default/rkhunter
+sed -i 's/APT_AUTOGEN.*/APT_AUTOGEN="true"/' /etc/default/rkhunter
+
+rkhunter --update
+rkhunter --propupd
+```
+
+To initiate a scan:
+
+```shell
+rkhunter -C
+```
 
 ### [optional] Disable root account completely
 

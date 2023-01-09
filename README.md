@@ -5,10 +5,19 @@
 
 </h1>
 
+<h3 align="center"><em>Self-Hosted Docker Swarm Toolkit</em></h3>
+
+<h3 align="center">
+<a href="https://github.com/aevernet/swarm-kit/tree/master/docs">Documentation</a>
+🔸
+<a href="https://github.com/aevernet/swarm-kit/issues">Issues</a>
+🔸
+<a href="https://github.com/aevernet/swarm-kit/discussions">Discussions</a>
+🔸
+<a href="https://github.com/aevernet/swarm-kit/releases">Releases</a>
+</h3>
+
 <p align="center">
-
-
-
 <!-- Uncomment any of the badges below that you think you might like to display on your README -->
 
 [//]: # (<a href="" target="_blank"><img src="https://img.shields.io/github/workflow/status/ragdata/.github/:ci?style=for-the-badge&logo=github" alt="Build"></a>)
@@ -47,12 +56,22 @@
 
 </p>
 
+## ⭐ Project Overview
+
+This project is destined to be a **MONSTER** which gives you:
+
+- **Detailed Documentation** <br /> Installable and detailed documentation giving step-by-step instructions and code blocks for each and every task required to build yourself a reliable, secure, self-hosted Docker Swarm Cluster packed with world-class services.
+<br /><br />
+- **Management & Utility Scripts Galore** <br /> If you don't want to burden yourself by reading the documentation and doing everything yourself, you can find a script you can execute with a single command which will take care of everything for you in seconds!
+<br /><br />
+- **An Extensive Services Catalogue** <br /> Packed with the best-of-the-best open-source solutions you can use to replace almost ANY SaaS product you're currently paying a monthly subscription for.  This is a game-changer for small-businesses and hobbyists alike!
+<br /><br />
+- **Accessible 24 / 7 Regardless of Where You Are** <br /> The glittering jewel of `Swarm-Kit` is the fact that I'll not only show you how to set this up at home, I'll show you how to make any of your self-hosted services available from the Internet so that you can access them no matter where you are.  The best part is that the method used in this project is secure, easy to set up and manage, and completely FREE of charge!
+
 ## 📖 Table of Contents
 
-- [Overview](#-overview)
+- [Project Overview](#-project-overview)
 - [Installation](#-installation)
-- [What's Included](#-whats-included)
-- [Screenshots](#-screenshots)
 - [Author / Maintainer](#-author--maintainer)
 - [Contributors](#-contributors)
 - [Supporters](#-supporters)
@@ -60,20 +79,10 @@
 - [License](#-license)
 - [Resources](#-resources)
 
-## 👀 Overview
-
-This collection of how-to documents and scripts will walk you through the process of setting up your very own, self-hosted, high-availability server infrastructure that - whether you do it as a hobby or in order to support your online business - will potentially save you hundreds if not _thousands_ of dollars each month in service subscriptions.
-
-This project will show you:
-
-- How to setup and maintain your own local 'cluster'
-- How to securely access your home-based services via the internet
-- How to install dozens of top-rated open-source applications
-- How to containerise your own applications
-- And how to do it all WITHOUT spending a fortune on hardware!
-  - (You could start with as little as a single Raspberry Pi (model 4) and an external hard drive if you wanted to)!
-
 ## 📂 Installation
+
+<details>
+<summary><strong>Project Installation Instructions</strong></summary>
 
 The first thing you'll need to do is clone a copy of this repository somewhere local to you.
 
@@ -117,7 +126,14 @@ Using Bash:
 bash src/bin/install.sh
 ```
 
-### and HERE is where the fun really starts ...
+</details>
+
+<br />
+
+<details>
+<summary><strong>Cluster Setup Instructions</strong></summary>
+
+### HERE is where the fun really starts ...
 
 `Swarm-Kit` is a large project with a lot of moving parts.  Therefore, one of the most important parts of this project is its [Documentation](docs/readme.md).  There are 2 ways you can approach installing `Swarm-Kit`:
 
@@ -130,37 +146,9 @@ bash src/bin/install.sh
     - `Swarm-Kit` ships with a host of scripts to help you get your own self-hosted Docker Swarm Cluster up and running in no time flat!  Even if you're a seasoned developer, I'm confident that you'll be able to find something among these worth your while.
     - To install `Swarm-Kit` automatically, you still need to head to the [project documentation](docs/readme.md), but I can promise that you're going to do a LOT less reading that if you had chosen to install manually.
 
-[`^ Top`](#-table-of-contents)
-
-## ❓ What's Included?
-
-In the simplest terms, `Swarm-Kit` consists of:
-
-- [**A butt-load of documentation**](docs/readme.md) which could ultimately teach you quite a lot about building and managing your own self-hosted services
-
-
-- A selection of [**Utility Scripts**](src/bin) which will help you set up and configure your cluster.  Most of these you can access and control using NPM - or you can access them from the Bash command line like they did in the olden days ...
-
-
-- A collection of [**Cluster Management Scripts**](src/scripts) which will help to keep you sane.  They'll also make the job of managing your cluster a whole lot easier.
-
-
-- A [**Services Catalogue**](src/stacks) which is what you _actually_ came here for.  These little beauties are ready-to-go, tried and tested `docker-compose` scripts which will allow you to deploy just about any service you could image - from Media and Game Servers, Backup Managers, and Password Vaults to Image Galleries, URL Shorteners, Website Builders and Analytics Packages - the `Swarm-Kit` Services Catalogue contains a curated selection of the BEST OF THE BEST open-source software solutions which, when used properly, could potentially save you HUNDREDS if not THOUSANDS of dollars per month in SaaS and Service Subscription Fees.  An absolute MUST-HAVE if you run a business which relies heavily on the internet (and there are _very_ few which don't).
-
-`Swarm-Kit` will even show you how to make your self-hosted services available to the Internet SAFELY, SECURELY, and WITHOUT having to deal with port forwarding on your home router (goodbye website hosting fees)!  Even if you're only interested in self-hosting as a hobby, the money you can save by not having to pay for services such as Spotify Premium, Scribd, and many others could be quite substantial!
-
-
-
+</details>
 
 [`^ Top`](#-table-of-contents)
-
-## 📸 Screenshots
-
-<!-- Show some screenshots of your UI or other interesting aspects of your project -->
-
-
-[`^ Top`](#-table-of-contents)
-
 
 ## 🚧 Author / Maintainer
 

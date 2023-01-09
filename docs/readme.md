@@ -7,7 +7,7 @@ v0.1.0
 
 </h1>
 
-## 👀 Overview
+## ⭐ Overview
 
 This collection of how-to documents and scripts will walk you through the process of setting up your very own, self-hosted, high-availability server infrastructure that - whether you do it as a hobby or in order to support your online business - will potentially save you hundreds if not _thousands_ of dollars each month in service subscriptions.
 
@@ -21,13 +21,8 @@ This project will show you:
 
 ## 📖 Table of Contents
 
+- [**Index & Introduction**](0-Index.md) (**READ FIRST**)
 - [**Chapter 1 - Setting Up Your Cluster**](1-Cluster.md)
-  - **Setup WSL2 (Ubuntu)**
-    - [Manual Instructions](wsl-init.md)
-    - [Automatic / Scripted](wsl-init-auto.md)
-  - **Setup Virtual Machines**
-    - [Manual Instructions](vm-init.md)
-    - [Automatic / Scripted](vm-init-auto.md)
 
 ## 📘 Introduction
 
