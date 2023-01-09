@@ -36,7 +36,7 @@ apt-config()
 {
     echoLog "spacer"
 
-    if [[ -f /etc/apt/apt.conf.d/99force-ipv4 ]]; then
+    if [[ ! -f /etc/apt/apt.conf.d/99force-ipv4 ]]; then
         echoLog "Configuring apt - " -n
         if echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
     fi
