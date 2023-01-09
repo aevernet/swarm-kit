@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/elem/clamav
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/clamav
+# Author:       Ragdata
+# Date:         09/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+clamav-install()
+{
+    echoLog "spacer"
+
+    aptInstall clamav
+    aptInstall clamav-daemon
+
+    echoLog "Checking installation: " -n
+    if clamscan -V; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+clamav-config()
+{
+    echoLog "spacer"
+
+    echoLog "Stopping ClamAV service: " -n
+    if systemctl stop clamav-freshclam; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
+
+    echoLog "Updating ClamAV database: " -n
+    if freshclam; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
+
+    echoLog "Starting ClamAV service: " -n
+    if systemctl start clamav-freshclam; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
+
+    echoLog "Starting ClamAV service: " -n
+    if systemctl enable clamav-freshclam; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
+
+    echoLog "Setup daily updates: " -n
+    if cp "$INCDIR"/cron/freshclam /etc/cron.daily/freshclam; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
+
+    echoLog "Updating update file permissions: " -n
+    if chmod +x /etc/cron.daily/freshclam; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+clamav-remove()
+{
+    echoLog "spacer"
+
+    aptRemove clamav
+    aptRemove clamav-daemon
+
+    echoLog "Removing CRON task: " -n
+    if rm -f /etc/cron.daily/freshclam; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
+
+    echoLog "spacer"
+}
