@@ -6,3 +6,6 @@ composer.lock
 package-lock.json
 vendor/
 node_modules/
+
+cfg/.defaults
+cfg/.network
