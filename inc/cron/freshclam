@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+/usr/bin/freshclam --quiet
+exit 0
