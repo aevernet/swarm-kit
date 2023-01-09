@@ -43,11 +43,12 @@ timedatectl set-timezone "<timezone>"
 This is a set of tools that I find useful to have lying around more often than not - feel free to change this to suit yourself:
 
 ```shell
-apt install -y gnupg2 snapd bash-completion daemon libsqlite3-dev sqlite3 mcrypt screen ca-certificates
-apt install -y software-properties-common id-utils uuid arj bzip2 nomarch lzop unzip zip cabextract libyaml-dev libxml2-dev libxslt1-dev
-apt install -y debconf-utils binutils zlib1g-dev build-essential libssl-dev libreadline-dev
-apt install -y libcurl4-openssl-dev libffi-dev libgdbm-dev libncurses5-dev automake libtool bison ffmpeg certbot python3-certbot-nginx
-apt install -y htop telegram-cli lvm2 moreutils
+apt install -y gnupg2 snapd daemon libsqlite3-dev sqlite3 mcrypt screen ca-certificates
+apt install -y software-properties-common id-utils uuid arj bzip2 nomarch lzop unzip zip
+apt install -y cabextract libyaml-dev libxml2-dev libxslt1-dev debconf-utils binutils
+apt install -y zlib1g-dev build-essential libssl-dev libreadline-dev libcurl4-openssl-dev
+apt install -y libffi-dev libgdbm-dev libncurses5-dev automake libtool bison ffmpeg certbot
+apt install -y python3-certbot-nginx htop telegram-cli lvm2 moreutils
 ```
 
 [`^ Top`](#note)

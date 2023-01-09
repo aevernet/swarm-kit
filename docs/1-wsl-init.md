@@ -157,9 +157,11 @@ apt update && apt upgrade -y && apt autoremove && apt autoclean
 
 [`^ Top`](#prerequisites)
 
-## Harden System
+## TIME TO HARDEN UP!
 
-"Hardening" a system is just a quicker way to say that you're going to beef up security a little.  Now, what I've given you here should by NO MEANS be considered the be-all-and-end-all of your system's security.  Having said that, the tools available for free these days are _incredibly_ capable, and in order to be hacked you really need to be doing something monumentally stupid ... like planning on connecting your home computer directly to the Internet like we'll be doing just a little later on ... relax, I've got a secret up my sleeve that makes it all SUPER SECURE and EASY ... (and absolves yours truly of any and all responsibility for YOUR stupidity) 😁
+"Hardening" a system is just a quicker way to say that you're going to beef up security a little.  Now, what I've given you here should by NO MEANS be considered the be-all-and-end-all of your system's security.  Having said that, the tools available for free these days are _incredibly_ capable, and in order to be hacked you really need to be doing something _monumentally stupid_ ... like planning on connecting your home computer directly to the Internet in exactly the way we'll be doing just a little later on ...
+
+(Relax, I'm going to show you a secret which makes this easy and **SUPER SECURE** ... and it completely absolves yours truly of any and all responsibility for YOUR stupidity - so we're all good!) 😁
 
 ### 1. Create Administrative User
 
@@ -185,7 +187,9 @@ rsync --archive --chown=<username>:<username> ~/.ssh /home/<username>
 
 ### 2. Configure A Firewall
 
-Now, because we're using Ubuntu it's likely that we've already got UFW installed.  Check it like this:
+Now, because we're using Ubuntu it's likely that we've already got UFW ([Uncomplicated Firewall](https://wiki.ubuntu.com/UncomplicatedFirewall)) installed.
+
+Check it like this:
 
 ```shell
 ufw status
@@ -203,7 +207,25 @@ ufw default deny incoming
 We're also going to need an SSH pass-through - so you if you intend to change your SSH port number (and you should), I guess you should pick your port number sooner rather than later:
 
 ```shell
-ufw allow <number>
+ufw allow <sshPort>/tcp
+```
+
+You can also restrict access from and to specific IP addresses using your firewall:
+
+(and don't forget that you'll likely want to copy this rule in Windows Defender as well)
+
+```shell
+ufw allow proto tcp from <homeIP> to <serverIP> port <sshPort>
+
+eg:
+
+ufw allow proto tcp from 202.45.122.95 to 172.24.32.64 port 2232
+```
+
+And if you want to get _really_ fancy you can even do some simple rate limiting with ufw:
+
+```shell
+ufw limit <sshPort>/tcp
 ```
 
 And NOW we can enable our Firewall (don't panic - we'll do more with it later):
@@ -262,12 +284,48 @@ By default, SSH uses Protocol 1 - whereas Protocol 2 is newer (2006), more secur
 echo "Protocol 2" >> /etc/ssh/sshd_config
 ````
 
+#### Log more aggressively
+
+By default, SSH logs everything at the "INFO" level - which doesn't capture details like failed login attempts which can be critical in defending against incursion.  Log more aggressively:
+
+```shell
+sec -i 's/#LogLevel.*/LogLevel VERBOSE/' /etc/ssh/sshd_config
+```
+
 #### Configure public / private key authentication
 
 Using public / private key pairs for authentication is infinitely more secure than using a password, so you really should be doing this everywhere you are able to do so.  Systems protected with passwords are MUCH more vulnerable to brute-force attacks than key-pair authenticated servers:
 
 ```shell
-sed -i 's/#PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+sed -i 's/#PubkeyAuthentication.*/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+```
+
+#### Disable Password Authentication
+
+Take brute force attacks right out of the equation by completely disabling the ability to connect via SSH using a password.  This won't stop you from logging into the machine directly with a password, we're just denying the use of passwords to anyone making a remote connection - well worth doing:
+
+```shell
+sed -i 's/ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/' /etc/ssh/sshd_config
+sed -i 's/PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+sed -i 's/#KerberosAuthentication.*/KerberosAuthentication no/' /etc/ssh/sshd_config
+sed -i 's/#GSSAPIAuthentication.*/GSSAPIAuthentication no/' /etc/ssh/sshd_config
+sed -i 's/#PermitEmptyPasswords.*/PermitEmptyPasswords no/' /etc/ssh/sshd_config
+```
+
+#### Disable .rhosts Files
+
+SSH can be made to emulate an obsolete rsh command which allows users to enable insecure access to their accounts via .rhosts.  The most prudent move would be to disable this altogether:
+
+```shell
+sed -i 's/#IgnoreRhosts.*/IgnoreRhosts yes/' /etc/ssh/sshd_config
+```
+
+#### Disable Host-Based Authentication
+
+Unless you have a specific use case which requires it, it is recommended that you NOT allow hosts to unilaterally trust one another - even within an organisation.  If you DO have a specific use-case which requires this, then my recommendation would be for you to reconsider your use-case:
+
+```shell
+sed -i 's/#HostBasedAuthentication.*/HostBasedAuthentication no/' /etc/ssh/sshd_config
 ```
 
 #### Restrict Logins to selected IP's
@@ -286,7 +344,7 @@ Why stop at restricting IP's when we can restrict exactly which users are allowe
 echo "AllowUsers <username>" >> /etc/ssh/sshd_config
 ```
 
-#### Setup an Idle Timeout
+#### Set an Idle Timeout
 
 To make sure we don't leave any zombie connections hanging around just waiting to be exploited by anyone who cares to look for them (and we do this a LOT), we can set a time limit that any connected terminal is allowed to remain idle before the server automatically terminates the session:
 
@@ -294,6 +352,14 @@ To make sure we don't leave any zombie connections hanging around just waiting t
 sed -i 's/#TCPKeepAlive.*/TCPKeepAlive yes/' /etc/ssh/sshd_config
 sed -i 's/#ClientAliveInterval.*/ClientAliveInterval 60/' /etc/ssh/sshd_config
 sed -i 's/#ClientAliveCountMax.*/ClientAliveCountMax 3/' /etc/ssh/sshd_config
+```
+
+#### Set Login Grace Timeout
+
+The "LoginGraceTimeout" specifies how long the server should wait after a connection request before disconnecting if the user fails to successfully log in.  The default 2 minutes is an eternity in nanoseconds ... reduce it:
+
+```shell
+sed -i 's/#LoginGraceTime.*/LoginGraceTime 300/' /etc/ssh/sshd_config
 ```
 
 #### Limit Failed Password Attempts
@@ -564,6 +630,14 @@ rkhunter -C
 
 [`^ Top`](#prerequisites)
 
+### 10. Finally, there are certain services you should ensure are NOT present
+
+While it's increasingly rare to see these services installed by default these days, some of them are so plagued by problems that it's not a bad idea to do a quick sweep to _ENSURE_ they won't bite you in the ass rather than leave it to chance.  So, under NO circumstances should you consider having the following services installed:
+
+```shell
+apt --purge remove xinetd nis yp-tools tftpd atftpd tftpd-hpa telnetd rsh-server rsh-redone-server
+```
+
 ### [optional] Disable root account completely
 
 > There could be any number of reasons that you WOULDN'T complete this step, so I'm not going to bother to list any.  If you can't think of one right NOW though, you really need to do this ...
@@ -582,11 +656,105 @@ sudo passwd root
 
 [`^ Top`](#prerequisites)
 
-### Configure Swapspace
+### Configure Swap Space
 
+This is another one that happens more rarely these days, and again it's better to be safe than sorry - so we're checking Swap Space.  'Swap Space' refers to the well-established practice which allows your system to make use of more memory than is physically available by storing some of that information on a drive.
 
+First, let's check if a swap file already exists:
+
+```shell
+swapon -s
+```
+
+If there's no active swap file, you'll see just the headings of the output table like so:
+
+```text
+Filename				Type		Size	Used	Priority
+```
+
+And that's perfectly OK - because now we get to define our own parameters for our swap. 😁
+
+#### Creating and Enabling the Swap File
+
+Before we create our swap file, it might be a good idea to figure out how much we'll actuall _need_.
+
+Here's a quick-and-dirty guide:
+
+| Server RAM  | Recommended Swap    |
+|-------------|---------------------|
+ | 2GB or less | Server RAM x 2      |
+ | 2GB to 8GB  | Equal to Server RAM |
+ | 8GB to 64GB | Server RAM x 0.5    |
+ | 64GB+       | 4GB Swap            |
+
+So, armed with that information, you'll need the `dd` command to create your swap file:
+
+```shell
+dd if=/dev/zero of=/swapfile bs=1024 count=512k
+```
+
+Prepare the swap file by creating a linux swap area:
+
+```shell
+mkswap /swapfile
+```
+
+Activate that swap file:
+
+```shell
+swapon /swapfile
+```
+
+Set appropriate permissions:
+
+```shell
+chown root:root /swapfile
+chmod 0600 /swapfile
+```
+
+And confirm the swap partition exists:
+
+```shell
+swapon -s
+```
+
+Now, instead of just seeing headings, you should see something like this:
+
+```text
+Filename                Type        Size    Used    Priority
+/swapfile               file        524284  0       -1
+```
+
+Now technically that's it, the swapfile is set up and working, but it's only going to last until the server reboots unless we seal the deal _IN BLOOD_ ... or you could stick an entry in the fstab if you wanted to be _that way_ about this: 🙄
+
+```shell
+echo "/swapfile     none    swap    sw      0       0" >> /etc/fstab
+```
+
+And now every time the server reboots, your swapfile will be automatically recreated and ready for action!
+
+#### Improving Swap Performance
+
+"Swappiness" determines how often data is being stored in your swapfile.  To achieve optimal performance, you want data being written to the drive ONLY when there's nowhere else for it to go - otherwise you're going to be needlessly incurring the time it takes to read from the drive when you should be reading directly from memory (and it is ALWAYS slower - I don't care how fancy your SSD is).
+
+You should think of your swap space as an _emergency buffer_ - **IT IS NOT _"FREE RAM"_**
+
+So, ideally, your swappiness should be set to 0:
+
+```shell
+echo 0 | tee /proc/sys/vm/swappiness
+echo vm.swappiness = 0 | tee -a /etc/sysctl.conf
+```
+
+Now reboot and make sure your swap is activated properly at startup!
+
+```shell
+reboot
+```
 
 [`^ Top`](#note)
+
+
 
 [**<< Chapter 1 - Setup Cluster**](1-Cluster.md)  🔸  [**INDEX**](0-Index.md)  🔸  [**Chapter 1 - Basic Services >>**](1-basic-services.md)
 
