@@ -41,7 +41,8 @@ fail2ban-config()
 
     service fail2ban status
 
-    cat << EOF > /etc/fail2ban/jail.local
+    if [[ ! -f /etc/fail2ban/jail.local ]]; then
+        cat << EOF > /etc/fail2ban/jail.local
 [DEFAULT]
 bantime = 8h
 ignoreip = 127.0.0.1/8
@@ -54,6 +55,7 @@ filter = sshd
 logpath = /var/log/auth.log
 maxretry = 3
 EOF
+    fi
 
     service fail2ban restart
 
