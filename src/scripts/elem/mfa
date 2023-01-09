@@ -37,8 +37,11 @@ mfa-config()
     echoLog "spacer"
 
     echoLog "Configuring MFA"
-    echo "" >> /etc/pam.d/sshd
-    echo "auth required pam_google_authenticator.so" >> /etc/pam.d/sshd
+
+    if ! grep -q "pam_google_auth" /etc/pam.d/sshd; then
+        echo "" >> /etc/pam.d/sshd
+        echo "auth required pam_google_authenticator.so" >> /etc/pam.d/sshd
+    fi
 
     sed -i 's/ChallengeResponseAuthentication.*/ChallengeResponseAuthentication yes/' /etc/ssh/sshd_config
 
