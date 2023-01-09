@@ -1,9 +1,7 @@
 <h1 align="center">
 <img src="https://raw.githubusercontent.com/aevernet/.github/master/images/banner/Aever-SW-D-800.png" alt="Aevernet">
 
-Setup WSL2 Instance (Ubuntu)
-
-Manually
+WSL2 Instance Setup (Ubuntu) - Manual
 
 </h1>
 
@@ -19,15 +17,7 @@ It is assumed that you're starting with a clean install of Ubuntu 20.04+ from th
 
 ## Introduction
 
-I've never been an Apple or Mac person.  From the very beginning, I've been a hardcore PC Junkie running the latest version of Windows and I've made absolutely no apologies whatsoever for doing so.  Oh sure, I went through my wanker phase when I hit university after the Army (mid-1990's) and installed Linux a couple of times and actually stuck with it for a few hours until I realised I couldn't get my favourite games to run - but never fear, I was just as much a hypocrite as the rest of them while slagging off Bill Gates and his corporate monolith which stood poised to dominate computing to its utter ruin ... or so we feared back then.
 
-If you haven't been an avid Windows user over the past few years, you _may_ have missed a trend which, I must admit, initially stunned me when I first realized the extent of it all.  Microsoft - rather than betraying us all and locking the world into their own particularly sadistic brand of proprietary technologies forever, have for several years now been one of the most benevolent champions of open-source technology and have put their money where their mouth is in a big way.
-
-Not only do they own [GitHub](https://github.com) (the world's largest repository of open-source software) and host repositories for the greatest and lowliest of software developers alike from all over the globe - and they do so for the vast majority of us absolutely free of charge.  You can see their true colors expressed in the WSL (Windows Subsystem for Linux) and the WSA (Windows Subsystem for Android) which is due for release to the wider market early in 2023.  They're literally banking the foundation of their core product offering - the Windows Operating System - on a proprietary version of Linux they call [CBL-Mariner](https://www.xda-developers.com/boot-cbl-mariner-microsoft-linux-distribution/).
-
-I can tell you that from the perspective of a professional software engineer who spent the majority of their career writing software intended to be run on some form of device running some incarnation of Linux or another on a PC running Windows, the advent of the WSL was the thing I had most longed for my entire career without ever realising it.
-
-My Windows PC is a tool that I finally feel is starting to exceed my expectations rather than constrain them, and the WSL is a big part of the reason for that.
 
 [`^ Top`](#prerequisites)
 
