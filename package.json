@@ -19,6 +19,8 @@
     "scripts": {
         "release": "bash src/etc/bump.sh",
         "bb-install": "bash submodules/bash-bits/src/bin/install.sh",
+        "svcs-basic": "bash src/bin/svcs-basic.sh",
+        "svcs-primary": "bash src/bin/svcs-primary.sh",
         "wsl-init": "bash src/bin/wsl-init.sh",
         "git-pull": "git pull --recurse-submodules",
         "sub-push": "git submodule update --remote --merge",
