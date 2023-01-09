@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/elem/cockpit
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/cockpit
+# Author:       Ragdata
+# Date:         09/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+cockpit-install()
+{
+    echoLog "spacer"
+
+    aptInstall cockpit
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+cockpit-config()
+{
+    echoLog "spacer"
+
+    service cockpit start
+    service cockpit status
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+cockpit-remove()
+{
+    echoLog "spacer"
+
+    aptRemove cockpit
+
+    echoLog "spacer"
+}
