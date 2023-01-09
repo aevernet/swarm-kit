@@ -7,22 +7,19 @@ v0.1.0
 
 </h1>
 
+<h3 align="center"><a href="https://github.com/aevernet/swarm-kit/blob/master/docs/0-Index.md">Documentation Index</a></h3>
+
 ## ⭐ Overview
 
-This collection of how-to documents and scripts will walk you through the process of setting up your very own, self-hosted, high-availability server infrastructure that - whether you do it as a hobby or in order to support your online business - will potentially save you hundreds if not _thousands_ of dollars each month in service subscriptions.
+This project is destined to be a **MONSTER** which gives you:
 
-This project will show you:
-
-- How to setup and maintain your own local 'cluster'
-- How to securely access your home-based services via the internet
-- How to install dozens of top-rated open-source applications
-- How to containerise your own applications
-- And much more!
-
-## 📖 Table of Contents
-
-- [**Index & Introduction**](0-Index.md) (**READ FIRST**)
-- [**Chapter 1 - Setting Up Your Cluster**](1-Cluster.md)
+- **Detailed Documentation** <br /> Installable and detailed documentation giving step-by-step instructions and code blocks for each and every task required to build yourself a reliable, secure, self-hosted Docker Swarm Cluster packed with world-class services.
+  <br /><br />
+- **Management & Utility Scripts Galore** <br /> If you don't want to burden yourself by reading the documentation and doing everything yourself, you can find a script you can execute with a single command which will take care of everything for you in seconds!
+  <br /><br />
+- **An Extensive Services Catalogue** <br /> Packed with the best-of-the-best open-source solutions you can use to replace almost ANY SaaS product you're currently paying a monthly subscription for.  This is a game-changer for small-businesses and hobbyists alike!
+  <br /><br />
+- **Accessible 24 / 7 Regardless of Where You Are** <br /> The secret weapon `Swarm-Kit` provides is the fact that I'll not only show you how to set this up at home, I'll show you how to make any of your self-hosted services available from the Internet so that you can access them no matter where you are.  The best part is that the method used in this project is secure, easy to set up and manage, and completely FREE of charge!
 
 ## 📘 Introduction
 

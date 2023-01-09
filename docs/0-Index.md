@@ -1,14 +1,11 @@
 <h1 align="center">
 <img src="https://raw.githubusercontent.com/Ragdata/Ragdata/master/images/logo/banner/SK2-800x400.png" alt="Aevernet">
 
-v0.1.0
+Documentation Index
 
-Index & Introduction
+v0.1.0
 </h1>
 
-
-
-## 📘 Introduction
 
 
 ## 📖 Table of Contents

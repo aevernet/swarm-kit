@@ -66,7 +66,7 @@ This project is destined to be a **MONSTER** which gives you:
 <br /><br />
 - **An Extensive Services Catalogue** <br /> Packed with the best-of-the-best open-source solutions you can use to replace almost ANY SaaS product you're currently paying a monthly subscription for.  This is a game-changer for small-businesses and hobbyists alike!
 <br /><br />
-- **Accessible 24 / 7 Regardless of Where You Are** <br /> The glittering jewel of `Swarm-Kit` is the fact that I'll not only show you how to set this up at home, I'll show you how to make any of your self-hosted services available from the Internet so that you can access them no matter where you are.  The best part is that the method used in this project is secure, easy to set up and manage, and completely FREE of charge!
+- **Accessible 24 / 7 Regardless of Where You Are** <br /> The secret weapon `Swarm-Kit` provides is the fact that I'll not only show you how to set this up at home, I'll show you how to make any of your self-hosted services available from the Internet so that you can access them no matter where you are.  The best part is that the method used in this project is secure, easy to set up and manage, and completely FREE of charge!
 
 ## 📖 Table of Contents
 
