@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2154
+# ==================================================================
+# src/scripts/elem/locale
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/locale
+# Author:       Ragdata
+# Date:         08/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+locale-install()
+{
+    echoLog "spacer"
+
+    echoLog "No install requirement"
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+locale-config()
+{
+    echoLog "spacer"
+
+    echoLog "Configuring Locale"
+
+    [[ -n "${REGISTRY[LOCALE]}" ]] && LOC="${REGISTRY[LOCALE]}" || LOC="en"
+
+    while [[ ! $LOCALE =~ $isLoc ]]
+    do
+        echo -en "Please enter your preferred locale: (${DM}$LOC${_0}) "
+        read -r LOCALE
+        [[ -z "$LOCALE" ]] && LOCALE="$LOC"
+    done
+    echoLog "spacer"
+
+    REGISTRY[LOCALE]="$LOCALE"
+
+    echoLog "Configuring Locale ..." -n
+    if locale-gen "$LOCALE"; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
+
+    echoLog "Updating Locale ..." -n
+    if update-locale LANG="$LOCALE"; then echoLog "SUCCESS!" -c; else errorLog "FAILED!" -c; fi
+
+    declare -a users
+
+    for userPath in /home/*
+    do
+        userName=${userPath##*/}
+        users+=("${userName}:${userPath}")
+    done
+
+    users+=("root:/root")
+
+    echoLog "Configuring Local per User ..."
+    for user in "${users[@]}"
+    do
+        userPath=${user##*:}
+        userName=${user%%:*}
+        bashFile="$userPath"/.bashrc
+        if grep "export LANG" "$bashFile"; then
+            sed -i "s/export LANG=.*/export LANG=\"$LOCALE\"/" "$bashFile"
+            sed -i "s/export LANGUAGE=.*/export LANGUAGE=\"$LOCALE\"/" "$bashFile"
+            sed -i "s/export LC_ALL=.*/export LC_ALL=\"$LOCALE\"/" "$bashFile"
+        else
+            { echo ""; echo "# export locale"; echo "export LANG=\"$LOCALE\""; echo "export LANGUAGE=\"$LOCALE\""; echo "export LC_ALL=\"$LOCALE\""; } >> "$bashFile"
+        fi
+    done
+
+    unset users
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+locale-remove()
+{
+    echoLog "spacer"
+
+    echoLog "No remove requirement"
+
+    echoLog "spacer"
+}
