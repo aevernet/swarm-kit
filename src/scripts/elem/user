@@ -3,7 +3,7 @@
 # ==================================================================
 # src/scripts/elem/user
 # ==================================================================
-# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+# Swarm-Kit - Self-Hosted Docker Swarm Toolkit
 #
 # File:         src/scripts/elem/user
 # Author:       Ragdata
@@ -63,7 +63,7 @@ user-install()
         # write password to password file to be presented to user at the end of script execution
         [[ ! -f "$PASSWORD" ]] && touch "$PASSWORD"
         echo "${REGISTRY[SYSUSER]}:${REGISTRY[SYSUSER_PASS]}" >> "$PASSWORD"
-         
+
     fi
 
 

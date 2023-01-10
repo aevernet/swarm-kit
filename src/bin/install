@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC2015
 # ==================================================================
 # src/bin/install
 # ==================================================================
-# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+# Swarm-Kit - Self-Hosted Docker Swarm Toolkit
 #
 # File:         src/bin/install
 # Author:       Ragdata
@@ -13,32 +13,23 @@
 # ==================================================================
 # Installs Swarm-Kit onto a linux (Ubuntu) server and gets it ready to work
 # Usage:
-#   npm run install
-#   - or -
-#   bash "src/bin/install.sh"
+#   ./install <opt>
 # ==================================================================
 # REQUIREMENTS
 # ==================================================================
 # Ensure that you have installed the Bash Bits project first
 # ==================================================================
 
-# preserve $PWD
-[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
-
 set -eu
 
 set -a allexport
-# load environment variables
-[[ -f "$rootPath/.env" ]] && source "$rootPath/.env" || source "$rootPath/.env.dist";
-set +a allexport
-
-# load bash-bits
-if [[ -f "$BB_LIB/bb-common_loader.sh" ]]; then
-    source "$BB_LIB/bb-common_loader.sh"
-else
-    echo "ERROR :: Swarm-Kit requires Bash-Bits to be installed"
-    exit 1
+# load .env file
+[[ -f "../../.env" ]] && source "../../.env" || source "../../.env.dist"
+## load bb-common libraries
+if ! command -v errorExit; then
+    [[ -f "$SK_BIN/bb-common.loader" ]] && "$SK_BIN/bb-common.loader" || "$SK_DIR/src/modules/bb-common/bb-common.loader"
 fi
+set +a allexport
 
 # initialise logger
 initLog "$SK_LOG/install"
@@ -136,7 +127,7 @@ report() {
 main() {
     clear
 
-    echoLog "Installing Swarm-Kit Docker Swarm Cookbook" --color=yellow
+    echoLog "Installing Swarm-Kit Docker Swarm Toolkit" --color=yellow
     echoLog "line"
     echoLog "spacer"
 

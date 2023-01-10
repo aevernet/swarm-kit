@@ -4,7 +4,7 @@
 # ==================================================================
 # src/bin/harden
 # ==================================================================
-# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+# Swarm-Kit - Self-Hosted Docker Swarm Toolkit
 #
 # File:         src/bin/harden
 # Author:       Ragdata
@@ -14,9 +14,7 @@
 # ==================================================================
 # Improves security for a server with a fresh install of Ubuntu 20.04+
 # Usage:
-#   npm run harden
-# - or -
-#   bash src/bin/harden.sh
+#   ./harden
 # ==================================================================
 
 # preserve $PWD

@@ -1,18 +1,11 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC2015
 # ==================================================================
 # src/etc/release
 # ==================================================================
 # Bumps version, creates changelog, tags, and release.
 # Usage:
-#   bash "scripts/bump.sh" \
-#       --user 'username' \                 # required
-#       --email 'user@example.com' \        # required
-#       --type 'patch' \                    # [patch|minor|major]
-#       --message 'bump to {{ version }}'   # optional
-#       --branch 'master'                   # optional
-#       --version 'version'                 # optional
-#       --preview                           # optional
+#   ./release <opt>
 # ==================================================================
 # REQUIREMENTS
 # ==================================================================
@@ -21,20 +14,16 @@
 #   - standard-version
 # ==================================================================
 
-# preserve $PWD
-[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
-
 set -eu
 
-set -a
-
-if [ -f "$baseDir/.env" ]; then
-    source "$baseDir"/.env
-else
-    source "$baseDir"/.env.dist
+set -a allexport
+# load .env file
+[[ -f "../../.env" ]] && source "../../.env" || source "../../.env.dist"
+## load bb-common libraries
+if ! command -v errorExit; then
+    [[ -f "$SK_BIN/bb-common.loader" ]] && "$SK_BIN/bb-common.loader" || "$SK_DIR/src/modules/bb-common/bb-common.loader"
 fi
-
-set +a
+set +a allexport
 
 WORKING_BRANCH="$(git branch --show-current)"
 STAGING_BRANCH="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"

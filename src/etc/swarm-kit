@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2015
+# ==================================================================
+# src/etc/swarm-kit
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Toolkit
+#
+# File:         src/etc/swarm-kit
+# Author:       Ragdata
+# Date:         10/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+# Swarm-Kit Controller Script
+# Usage:
+#   ./swarm-kit <opt>
+# ==================================================================
+
+set -eu
+
+set -a allexport
+# load sk-path file
+source "inc/sk-path"
+# load .env file
+[[ -f "$SK_DIR/.env" ]] && source "$SK_DIR/.env" || source "$SK_DIR/.env.dist"
+## load bb-common libraries
+if ! command -v errorExit; then
+    [[ -f "$SK_BIN/bb-common.loader" ]] && "$SK_BIN/bb-common.loader" || "$SK_DIR/src/modules/bb-common/bb-common.loader"
+fi
+set +a allexport
+
+release() {
+    echo
+}
+
+install() {
+    echo
+}
+
+uninstall() {
+    echo
+}
+
+setup() {
+    echo
+}
+
+sk_opts=$(getopt -l "release::,install,uninstall,setup,help" -o "r::iush" -a -- "$@")
+
+eval set --"$sk_opts"
+
+while true
+do
+    case "$1" in
+        -r|--release)
+            type="$2"
+            release
+            shift 2
+            ;;
+        -i|--install)
+            install
+            shift
+            ;;
+        -u|--uninstall)
+            uninstall
+            shift
+            ;;
+        -s|--setup)
+            setup
+            shift
+            ;;
+        -h|--help)
+            help
+            exit 0
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            echo "ERROR :: Invalid Argument '$1'!"
+            exit 1
+            ;;
+    esac
+done

@@ -1,6 +1,6 @@
 {
     "name": "swarm-kit",
-    "description": "Aevernet's Self-Hosted Docker Swarm Cookbook",
+    "description": "Aevernet's Self-Hosted Docker Swarm Toolkit",
     "version": "0.1.0",
     "repository": {
         "type": "git",
