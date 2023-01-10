@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #
 # ==================================================================
-# src/bin/install.sh
+# src/bin/install
 # ==================================================================
 # Swarm-Kit - Self-Hosted Docker Swarm Cookbook
 #
-# File:         src/bin/install.sh
+# File:         src/bin/install
 # Author:       Ragdata
 # Date:         08/01/2023
 # License:      MIT License
@@ -27,10 +27,10 @@
 
 set -eu
 
-set -a
+set -a allexport
 # load environment variables
 [[ -f "$rootPath/.env" ]] && source "$rootPath/.env" || source "$rootPath/.env.dist";
-set +a
+set +a allexport
 
 # load bash-bits
 if [[ -f "$BB_LIB/bb-common_loader.sh" ]]; then
