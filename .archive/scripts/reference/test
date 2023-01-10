@@ -1,0 +1,7 @@
+if [[ -z "$baseDir" ]]; then
+    declare -gx baseDir
+    baseDir="$(dirname "$(realpath "$0")")"
+fi
+
+echo "baseDir: $baseDir"
+

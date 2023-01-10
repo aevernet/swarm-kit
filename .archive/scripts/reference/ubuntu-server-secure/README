@@ -1,0 +1,30 @@
+#
+# Ubuntu Server Secure script v0.1 alpha by The Fan Club - May 2012
+# 
+# - Zenity GUI installer version
+#
+
+* Ubuntu Server Secure script v0.1 alpha by The Fan Club - May 2012
+ 
+DISCLAIMER: Use with care. This script is provided purely for alpha testing and can harm your system if used incorrectly
+
+NOTE: This is a GUI installer script that depends on zenity.
+
+
+* Installation Instruction
+
+- Install zenity if not already installed by default on Ubuntu : sudo apt-get install zenity
+- Download the Ubuntu Server Secure script
+- Change Directory to the downloaded file : cd /path/to/download
+- From terminal enter : 
+
+sudo tar -zxvf ubuntu-server-secure.tar.gz
+cd ubuntu-server-secure
+sudo chmod +x ubuntu-server-secure.sh
+gksudo sh ubuntu-server-secure.sh
+
+
+* Log File
+
+Complete log can be found at: /var/log/uss_YYYY-MM-DD.log (replace YYYY-MM-DD with current date) 
+
