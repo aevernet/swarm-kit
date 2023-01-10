@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/elem/nvm
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/nvm
+# Author:       Ragdata
+# Date:         08/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+nvm-install()
+{
+    echoLog "spacer"
+
+    echoLog "Installing NVM ..."
+    curl https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+nvm-config()
+{
+    echoLog "spacer"
+
+    echoLog "Configuring NVM ..."
+    cat << EOF >> "$HOME"/.bashrc
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+EOF
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+nvm-remove()
+{
+    echoLog "spacer"
+
+
+
+    echoLog "spacer"
+}
