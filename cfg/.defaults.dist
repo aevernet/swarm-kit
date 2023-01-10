@@ -17,6 +17,7 @@
 
 declare -Agx REGISTRY
 
+REGISTRY[LOCALE]="en_AU"
 REGISTRY[TIMEZONE]="Australia/Brisbane"
 REGISTRY[GPG_EMAIL]="ragdata@users.noreply.github.com"
 REGISTRY[GIT_USER]='Ragdata'
