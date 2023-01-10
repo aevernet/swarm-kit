@@ -2,11 +2,11 @@
 # shellcheck disable=SC2050
 # shellcheck disable=SC2057
 # ==================================================================
-# src/bin/harden.sh
+# src/bin/harden
 # ==================================================================
 # Swarm-Kit - Self-Hosted Docker Swarm Cookbook
 #
-# File:         src/bin/harden.sh
+# File:         src/bin/harden
 # Author:       Ragdata
 # Date:         09/01/2023
 # License:      MIT License
@@ -24,10 +24,10 @@
 
 set -eu
 
-set -a
+set -a allexport
 # load environment variables
 [[ -f "$rootPath/.env" ]] && source "$rootPath/.env" || source "$rootPath/.env.dist";
-set +a
+set +a allexport
 
 # load bash-bits
 if [[ -f "$SK_LIB/bb-common_loader.sh" ]]; then
