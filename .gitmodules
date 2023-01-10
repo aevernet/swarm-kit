@@ -1,5 +1,0 @@
-[submodule "submodule/bash-bits"]
-	path = submodule/bash-bits
-	url = https://github.com/Ragdata/bash-bits
-[submodule "bash-bits"]
-	branch = master
