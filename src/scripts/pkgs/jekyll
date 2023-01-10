@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/pkgs/jekyll
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/pkgs/jekyll
+# Author:       Ragdata
+# Date:         10/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+# Installs jekyll on a linux machine to enable GitHub Pages
+# Usage:
+#   npm run jekyll-install
+# - or -
+#   bash "src/scripts/pkgs/jekyll"
+# ==================================================================
+
+# preserve $PWD
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+set -eu
+
+set -o allexport
+# load environment variables
+[[ -f "$rootPath/.env" ]] && source "$rootPath/.env" || source "$rootPath/.env.dist";
+set +o allexport
+
+# load bash-bits
+if [[ -f "$BB_LIB/bb-common_loader.sh" ]]; then
+    source "$BB_LIB/bb-common_loader.sh"
+else
+    echo "ERROR :: Swarm-Kit requires Bash-Bits to be installed"
+    exit 1
+fi
+
+# initialise logger
+initLog "$SK_LOG/jekyll-install"
+
+# install ruby
+loadSource "$ELEM"/ruby
+ruby-install
+
+# install gems
+loadSource "$ELEM"/gems
+gems-install
+
+# install bundler
+loadSource "$ELEM"/bundler
+bundler-install
