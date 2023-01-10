@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # ==================================================================
-# src/etc/bump.sh
+# src/etc/release
 # ==================================================================
 # Bumps version, creates changelog, tags, and release.
 # Usage:
@@ -74,7 +74,7 @@ help() {
     echo
     echo "      npm run release -- <arg>"
     echo "- or -"
-    echo "      bash scripts/bump.sh <arg>"
+    echo "      ./release <arg>"
     echo
     echo "Arguments:"
     echo "      The only argument you need to supply is a single string which defines the type of release you want to perform:"
