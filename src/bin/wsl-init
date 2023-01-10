@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2154
 # ==================================================================
-# src/bin/wsl-init.sh
+# src/bin/wsl-init
 # ==================================================================
 # Swarm-Kit - Self-Hosted Docker Swarm Cookbook
 #
-# File:         src/bin/wsl-init.sh
+# File:         src/bin/wsl-init
 # Author:       Ragdata
 # Date:         08/01/2023
 # License:      MIT License
@@ -60,6 +60,10 @@ else
     fi
 fi
 
+# fortify apt
+loadSource "$ELEM/apt"
+apt-config
+
 # add required repositories
 loadSource "$ELEM/repos"
 # update apt database, upgrade packages, clear the table
@@ -67,3 +71,9 @@ apt upgrade -y && apt autoremove && apt autoclean
 
 # harden the system
 bash "$SK_BIN"/harden.sh
+
+# create swapspace
+loadSource "$ELEM/swapspace"
+swapspace-config
+
+reboot
