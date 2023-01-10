@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/elem/gems
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/gems
+# Author:       Ragdata
+# Date:         10/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+gems-install()
+{
+    echoLog "spacer"
+
+    aptInstall rubygems
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+gems-config()
+{
+    echoLog "spacer"
+
+    echoLog "No config requirement"
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+gems-remove()
+{
+    echoLog "spacer"
+
+    aptRemove rubygems
+
+    echoLog "spacer"
+}
