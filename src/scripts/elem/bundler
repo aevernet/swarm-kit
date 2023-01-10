@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# src/scripts/elem/bundler
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Cookbook
+#
+# File:         src/scripts/elem/bundler
+# Author:       Ragdata
+# Date:         08/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# preserve rootPath
+[[ -z "$rootPath" ]] && declare -gx rootPath="$PWD"
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+bundler-install()
+{
+    echoLog "spacer"
+
+    aptInstall bundler
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+bundler-config()
+{
+    echoLog "spacer"
+
+    echoLog "No config requirement"
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+bundler-remove()
+{
+    echoLog "spacer"
+
+    aptRemove bundler
+
+    echoLog "spacer"
+}
