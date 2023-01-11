@@ -2,7 +2,7 @@
 .idea/
 .env
 
-src/etc/release
+release
 composer.lock
 package-lock.json
 vendor/
