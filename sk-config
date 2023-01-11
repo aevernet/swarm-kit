@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# sk-config
+# ==================================================================
+# Bash Bits - Modular Bash Library
+#
+# File:         sk-config
+# Author:       Ragdata
+# Date:         11/01/2023
+# License:      MIT License
+# Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
+# ==================================================================
+# Swarm-Kit Configuration Script
+# Usage:
+#   ./sk-config
+# ==================================================================
+
+. .path.dist
+. submodules/bash-bits/src/modules/bb-common/bb-functions
+
+if [[ "${BASH_VERSION:0:1}" -lt 4 ]]; then
+    echo "This script requires a minimum Bash version of 4+!"
+    exit 1
+fi
+if [[ "$EUID" -ne 0 ]]; then
+    echo "This script MUST be run as root! (sudo ./bb-config)"
+    exit 1
+fi
+
+[ "$SUDO_USER" ] && user=$SUDO_USER || user=$(whoami)
+
+echo
+echo "Configuring Global Environment Variables"
+
+cp .env.dist .env
+chown "$user":"$user" .env
+cp .path.dist .path
+chown "$user":"$user" .path
+echo "SK_DIR=$(pwd)" >> .path
+echo "PATH=$SK_LIB:$SK_BIN:$SK_ETC:$PATH" >> .path
+
+cp .path /etc/profile.d/sk-path.sh
+file2Env .path
+
+echo
+echo "DONE!"
+echo
+echo "In order to complete configuration, you need to close this session and login again"
+echo
