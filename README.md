@@ -1,7 +1,7 @@
 <h1 align="center">
 <img src="https://raw.githubusercontent.com/Ragdata/Ragdata/master/images/logo/banner/SK2-800x400.png" alt="Aevernet">
 
-<a href="https://github.com/aevernet/swarm-kit/releases/tag/v0.1.0">Swarm-Kit v0.1.0</a>
+<a href="https://github.com/aevernet/swarm-kit/releases/tag/v0.1.0">Swarm Kit v0.1.0</a>
 
 </h1>
 
@@ -66,7 +66,7 @@ This project is destined to be a **MONSTER** which gives you:
 <br /><br />
 - **An Extensive Services Catalogue** <br /> Packed with the best-of-the-best open-source solutions you can use to replace almost ANY SaaS product you're currently paying a monthly subscription for.  This is a game-changer for small-businesses and hobbyists alike!
 <br /><br />
-- **Accessible 24 / 7 Regardless of Where You Are** <br /> The secret weapon `Swarm-Kit` provides is the fact that I'll not only show you how to set this up at home, I'll show you how to make any of your self-hosted services available from the Internet so that you can access them no matter where you are.  The best part is that the method used in this project is secure, easy to set up and manage, and completely FREE of charge!
+- **Accessible 24 / 7 Regardless of Where You Are** <br /> The secret weapon `Swarm Kit` provides is the fact that I'll not only show you how to set this up at home, I'll show you how to make any of your self-hosted services available from the Internet so that you can access them no matter where you are.  The best part is that the method used in this project is secure, easy to set up and manage, and completely FREE of charge!
 
 ## 📖 Table of Contents
 
@@ -81,72 +81,54 @@ This project is destined to be a **MONSTER** which gives you:
 
 ## 📂 Installation
 
-<details>
-<summary><strong>Project Installation Instructions</strong></summary>
+### Step 1 - Clone the Repository
 
-The first thing you'll need to do is clone a copy of this repository somewhere local to you.
+Because this repository contains submodules this may trip some people up - but it's very easy to make sure everything arrives as it should:
 
-Then, you can choose whether or not you want to run the installer to make the code a part of your system.  NOTE:  This WILL NOT set up the whole show for you - this is just making sure the code is comfortable and easy to manage for what comes later.  If you intend to use the package for the foreseeable future, I recommend that you do the following:
-
-**Step 1.** Go to where you have saved your copy and enter the root directory of the repository.
-
-**Step 2.** Install the `Bash-Bits` package which is included as a submodule of the `Swarm-Kit` repo:
+First, clone this repository as usual:
 
 ```shell
-cd submodule/bash-bits
+git clone git@github.com:ragdata/swarm-kit
 ```
 
-Install using NPM:
+Then, initialise the submodule:
 
 ```shell
-npm run install
+git submodule init
 ```
 
-Install using Bash:
+And finally, update the submodule
 
 ```shell
-bash src/bin/install.sh
+git submodule update
 ```
 
-**Step 3.** Return to the root directory of the `Swarm-Kit` repo and run its installer:
+### Step 2 - Configure & Install Swarm Kit
+
+Configuring and installing `Swarm Kit` is just as easy:
 
 ```shell
-cd -
+sudo ./sk-config
+
+cd src/etc
+
+sudo ./swarm-kit -i
 ```
 
-Using NPM:
-
-```shell
-npm run install
-```
-
-Using Bash:
-
-```shell
-bash src/bin/install.sh
-```
-
-</details>
-
-<br />
-
-<details>
-<summary><strong>Cluster Setup Instructions</strong></summary>
+And that's it!  `Swarm Kit` is installed along with `Bash Bits` which is the **Modular Bash Library** I maintain and it's included with this project because I like to put my money where my mouth is by using my own tools! This project is an extensive project written almost entirely in Bash script - I'm not sure it would have been possible for me to do without Bash Bits. If you'd like to find out more about Bash Bits, access documentation / raise an issue / etc, you can do so at the [**`Bash Bits` GitHub Repository**](https://github.com/ragdata/bash-bits)
 
 ### HERE is where the fun really starts ...
 
-`Swarm-Kit` is a large project with a lot of moving parts.  Therefore, one of the most important parts of this project is its [Documentation](docs/readme.md).  There are 2 ways you can approach installing `Swarm-Kit`:
+`Swarm Kit` is a large project with a lot of moving parts.  Therefore, one of the most important parts of this project is its [Documentation](docs/readme.md).  There are 2 ways you can approach installing `Swarm Kit`:
 
 1. **Manually**
-    - Installing `Swarm-Kit` manually is not for the feint of heart.  This is recommended ONLY if you are confident that you know what you're doing, AND you think you might want to make some changes along the way.
-    - To install `Swarm-Kit` manually, head to the [project documentation](docs/readme.md) and start reading ... and be prepared to do a LOT of it ...
+    - Installing `Swarm Kit` manually is not for the feint of heart.  This is recommended ONLY if you are confident that you know what you're doing, AND you think you might want to make some changes along the way.
+    - To install `Swarm Kit` manually, head to the [project documentation](docs/readme.md) and start reading ... and be prepared to do a LOT of it ...
 
 
 2. **Automagically**
-    - `Swarm-Kit` ships with a host of scripts to help you get your own self-hosted Docker Swarm Cluster up and running in no time flat!  Even if you're a seasoned developer, I'm confident that you'll be able to find something among these worth your while.
-    - To install `Swarm-Kit` automatically, you still need to head to the [project documentation](docs/readme.md), but I can promise that you're going to do a LOT less reading that if you had chosen to install manually.
-
-</details>
+    - `Swarm Kit` ships with a host of scripts to help you get your own self-hosted Docker Swarm Cluster up and running in no time flat!  Even if you're a seasoned developer, I'm confident that you'll be able to find something among these worth your while.
+    - To install `Swarm Kit` automatically, you still need to head to the [project documentation](docs/readme.md), but I can promise that you're going to do a LOT less reading that if you had chosen to install manually.
 
 [`^ Top`](#-table-of-contents)
 
@@ -161,7 +143,6 @@ Created by: Darren Poulton (Ragdata)</a>
 
 [`^ Top`](#-table-of-contents)
 
-
 ## 💎 Contributors
 
 If you'd like to make a contribution of code, then please see my [Contributor's Guidelines](.github/CONTRIBUTING.md)
@@ -169,7 +150,6 @@ If you'd like to make a contribution of code, then please see my [Contributor's 
 It's not just code that I'm looking for though.  If you have any ideas or suggestions about how this project may be improved, don't hesitate to [open an Issue](https://github.com/aevernet/swarm-kit/issues) and let me know!  Contributions of ALL kinds will be recognised here if they are made a part of this project.
 
 [`^ Top`](#-table-of-contents)
-
 
 ## 🏆 Supporters
 
@@ -189,7 +169,6 @@ This project incorporates ideas and / or code crafted by the following talented 
 > only because we stand upon the shoulders of giants"
 
 [`^ Top`](#-table-of-contents)
-
 
 ## 📄 License
 

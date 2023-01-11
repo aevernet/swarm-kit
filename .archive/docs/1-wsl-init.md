@@ -21,6 +21,38 @@ It is assumed that you're starting with a clean install of Ubuntu 20.04+ from th
 
 [`^ Top`](#prerequisites)
 
+## Initial Environment Setup
+
+The very first thing you'll need to do is give your root user a password:
+
+```shell
+sudo passwd root
+```
+
+Then, switch to root privileges:
+
+```shell
+su
+```
+
+[`^ Top`](#prerequisites)
+
+## Install "Stack Kit"
+
+Installing `Stack Kit` means getting all of the kit files onto your machine so that you can THEN use them to build your Cluster - so don't expect the whole lot to be done when you're finished here, 'cause you've still got quite a way to go yet!
+
+```shell
+sudo ./sk-config
+
+cd src/etc
+
+sudo ./swarm-kit -i
+```
+
+The `Swarm Kit` installer also takes care of installing and configuring `Bash Bits` which is the **Modular Bash Library** I maintain and is included with this project because I like to put my money where my mouth is by using my own tools!  This project is an extensive project written almost entirely in Bash script - I'm not sure it would have been possible for me to do _without_ `Bash Bits`.  If you'd like to find out more about `Bash Bits`, access documentation / raise an issue / etc, you can do so at the [**`Bash Bits` GitHub Repository**](https://github.com/ragdata/bash-bits)
+
+[`^ Top`](#prerequisites)
+
 ## Install Ruby
 
 ## Install Ruby Gems
@@ -55,42 +87,6 @@ But seriously - don't NOT write that code to the bottom of your `.bashrc` file o
 
 [`^ Top`](#prerequisites)
 
-
-## Install "Bash Bits"
-
-`Bash Bits` is my modular library for Bash which has been written with WSL2 in mind.  It's included as a submodule of this repository, so you don't need to look very hard for it.  Installation is fully-automated, although you can make some configuration changes if you wish.  See the [**Bash Bits**](https://github.com/Ragdata/bash-bits) project documentation for details.
-
-Installing with NPM:
-
-```shell
-npm run bb-install
-```
-
-Installing with Bash:
-
-```shell
-bash submodules/bash-bits/src/bin/install.sh
-```
-
-And in one fell swoop, you've gained a bunch of useful aliases, functions, and dotfiles that you will one day wonder how you ever lived without.
-
-[`^ Top`](#prerequisites)
-
-## Initial Environment Setup
-
-The very first thing you'll need to do is give your root user a password:
-
-```shell
-sudo passwd root
-```
-
-Then, switch to root privileges:
-
-```shell
-su
-```
-
-[`^ Top`](#prerequisites)
 
 ## Enable Systemd on WSL2
 
