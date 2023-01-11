@@ -3,6 +3,7 @@
 .env
 
 release
+.files
 composer.lock
 package-lock.json
 vendor/
