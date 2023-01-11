@@ -1,0 +1,6 @@
+[submodule "submodules/bash-bits"]
+	path = submodules/bash-bits
+	url = git@github.com:ragdata/bash-bits
+[submodule "submodules/release-manager"]
+	path = submodules/release-manager
+	url = git@github.com:ragdata/release-manager
