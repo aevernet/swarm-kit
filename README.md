@@ -137,7 +137,7 @@ And that's it!  `Swarm Kit` is installed along with `Bash Bits` which is the **M
 <h3 align="center">
 <a href="https://github.com/ragdata" target="_blank"><img src="https://raw.githubusercontent.com/Ragdata/Ragdata/master/images/logo/banner/RedEyed-SW-D-800.png" alt="RedEyed Software" />
 
-Created by: Darren Poulton (Ragdata)</a>
+Created with ☕ by Ragdata</a>
 
 </h3>
 
