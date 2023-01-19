@@ -11,7 +11,7 @@
 # License:      MIT License
 # Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
 # ==================================================================
-# Main configuration file for Swarm-Kit
+# Default Values for Swarm-Kit
 # Edit as necessary and copy to a file named '.defaults'
 # ==================================================================
 
