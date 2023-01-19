@@ -4,7 +4,7 @@
 # ==================================================================
 export SK_LIB="/usr/local/lib/sk"
 export SK_BIN="/usr/local/bin/sk"
-export SK_ETC="/usr/local/etc/sk"
+export ETC="/usr/local/etc"
 export SK_OPT="/opt/sk"
 export SK_LOG="/var/log/sk"
 # ==================================================================
