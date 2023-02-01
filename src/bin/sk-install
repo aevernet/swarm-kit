@@ -62,10 +62,10 @@ createPaths() {
     [[ ! -d "$SK_LOG" ]] && mkdir -p "$SK_LOG"
 
     # create sk paths
-    [[ ! -d "$CFGDIR" ]] && mkdir -p "$CFGDIR"
-    [[ ! -d "$INCDIR" ]] && mkdir -p "$INCDIR"
-    [[ ! -d "$REGDIR" ]] && mkdir -p "$REGDIR"
-    [[ ! -d "$DOCDIR" ]] && mkdir -p "$DOCDIR"
+    [[ ! -d "$SK_CFG" ]] && mkdir -p "$SK_CFG"
+    [[ ! -d "$SK_INC" ]] && mkdir -p "$SK_INC"
+    [[ ! -d "$SK_REG" ]] && mkdir -p "$SK_REG"
+    [[ ! -d "$SK_DOC" ]] && mkdir -p "$SK_DOC"
     [[ ! -d "$PKGDIR" ]] && mkdir -p "$PKGDIR"
     [[ ! -d "$SCRIPTS" ]] && mkdir -p "$SCRIPTS"
     [[ ! -d "$STACKS" ]] && mkdir -p "$STACKS"
@@ -82,10 +82,10 @@ SK_ETC='$SK_ETC'
 SK_OPT='$SK_OPT'
 SK_LOG='$SK_LOG'
 # SK PATHS
-CFGDIR='$CFGDIR'
-INCDIR='$INCDIR'
-REGDIR='$REGDIR'
-DOCDIR='$DOCDIR'
+SK_CFG='$SK_CFG'
+SK_INC='$SK_INC'
+SK_REG='$SK_REG'
+SK_DOC='$SK_DOC'
 SCRIPTS='$SK_OPT/scripts'
 STACKS='$SK_OPT/stacks'
 ELEM='$SCRIPTS/elem'
@@ -169,7 +169,7 @@ main() {
     do
         if [[ -f "$file" ]]; then
             echoLog "$file"
-            sudo install -m 775 -g root -o root "$file" "$CFGDIR/$file"
+            sudo install -m 775 -g root -o root "$file" "$SK_CFG/$file"
         fi
     done
 
@@ -181,7 +181,7 @@ main() {
     do
         if [[ -f "$file" ]]; then
             echoLog "$file"
-            sudo install -m 777 -g root -o root "$file" "$INCDIR/$file"
+            sudo install -m 777 -g root -o root "$file" "$SK_INC/$file"
         elif [[ -d "$file" ]]; then
             echoLog "spacer"
             echoLog "$file"
@@ -189,7 +189,7 @@ main() {
             for inc in "$PWD"/inc/"$file"/*
             do
                 echoLog "$inc"
-                sudo install -m 777 -g root -o root "$doc" "$INCDIR/$file/$inc"
+                sudo install -m 777 -g root -o root "$doc" "$SK_INC/$file/$inc"
             done
         fi
     done
@@ -202,7 +202,7 @@ main() {
     do
         if [[ -f "$file" ]]; then
             echoLog "$file"
-            sudo install -m 777 -g root -o root "$file" "$DOCDIR/$file"
+            sudo install -m 777 -g root -o root "$file" "$SK_DOC/$file"
         elif [[ -d "$file" ]]; then
             echoLog "spacer"
             echoLog "$file"
@@ -210,7 +210,7 @@ main() {
             for doc in "$PWD"/docs/"$file"/*
             do
                 echoLog "$doc"
-                sudo install -m 777 -g root -o root "$doc" "$DOCDIR/$file/$doc"
+                sudo install -m 777 -g root -o root "$doc" "$SK_DOC/$file/$doc"
             done
         fi
     done
