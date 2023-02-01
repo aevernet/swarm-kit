@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# shfmt
+# ==================================================================
+# Swarm-Kit - Self-Hosted Docker Swarm Toolkit
+#
+# File:         shfmt
+# Author:       Ragdata
+# Date:         02/02/2023
+# License:      MIT License
+# Copyright:    Copyright © 2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+shfmt-install()
+{
+    echoLog "spacer"
+
+    aptInstall shfmt
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+shfmt-config()
+{
+    echoLog "spacer"
+
+    echoLog "No Config Requirement"
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+shfmt-remove()
+{
+    echoLog "spacer"
+
+    aptRemove shfmt
+
+    echoLog "spacer"
+}
