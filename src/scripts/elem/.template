@@ -12,39 +12,39 @@
 # Copyright:    Copyright © 2022-2023 Darren Poulton (Ragdata)
 # ==================================================================
 
-# ------------------------------------------------------------------
-# FUNCTIONS
-# ------------------------------------------------------------------
-#
-# INSTALL FUNCTION
-#
-template-install()
-{
-    echoLog "spacer"
+    # ------------------------------------------------------------------
+    # FUNCTIONS
+    # ------------------------------------------------------------------
+    #
+    # INSTALL FUNCTION
+    #
+    template-install()
+    {
+        echoLog "spacer"
 
 
 
-    echoLog "spacer"
-}
-#
-# CONFIG FUNCTION
-#
-template-config()
-{
-    echoLog "spacer"
+        echoLog "spacer"
+    }
+    #
+    # CONFIG FUNCTION
+    #
+    template-config()
+    {
+        echoLog "spacer"
 
 
 
-    echoLog "spacer"
-}
-#
-# REMOVE FUNCTION
-#
-template-remove()
-{
-    echoLog "spacer"
+        echoLog "spacer"
+    }
+    #
+    # REMOVE FUNCTION
+    #
+    template-remove()
+    {
+        echoLog "spacer"
 
 
 
-    echoLog "spacer"
-}
+        echoLog "spacer"
+    }

@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#
+# ==================================================================
+# brew
+# ==================================================================
+# swarm-kit - Description
+#
+# File:         brew
+# Author:       Ragdata
+# Date:         02/02/2023
+# License:      MIT License
+# Copyright:    Copyright © 2023 Darren Poulton (Ragdata)
+# ==================================================================
+
+# ------------------------------------------------------------------
+# FUNCTIONS
+# ------------------------------------------------------------------
+#
+# INSTALL FUNCTION
+#
+brew-install()
+{
+    echoLog "spacer"
+
+    echoLog "Installing Homebrew ..."
+    mkdir -p "$HOME"/downloads
+    cd "$HOME"/downloads || return 1
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    echoLog "spacer"
+}
+#
+# CONFIG FUNCTION
+#
+brew-config()
+{
+    local dirname
+
+    echoLog "spacer"
+
+    echoLog "Configuring Homebrew ..."
+    for dir in /home/*
+    do
+        dirname="${dir##*/}"
+        echo "eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" | sudo tee -a /home/"$dirname"/.bash_env
+    done
+    echo "eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" | sudo tee -a /root/.bash_env
+    echoLog "Homebrew requires session restart before it can be used"
+
+    echoLog "spacer"
+}
+#
+# REMOVE FUNCTION
+#
+brew-remove()
+{
+    echoLog "spacer"
+
+    echoLog "Uninstalling Homebrew ..."
+    mkdir -p "$HOME"/downloads
+    cd "$HOME"/downloads || return 1
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall.sh)"
+
+    # TODO: Remove eval from $HOME/.bashrc
+
+    echoLog "spacer"
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2016
+#
 # ==================================================================
 # go
 # ==================================================================
@@ -22,21 +22,7 @@ go-install()
 {
     echoLog "spacer"
 
-    # create user downloads directory
-    echoLog "Creating User Downloads Directory ..."
-    mkdir -p ~/downloads
-    # change to user downloads directory
-    cd ~/downloads || return 1
-    # download latest tarball
-    echoLog "spacer"
-    echoLog "Downloading Latest GO Tarball" --color=gold
-    wget https://go.dev/dl/go1.19.5.linux-amd64.tar.gz
-    echoLog "spacer"
-    # untar to /usr/local
-    echoLog "Inflating Tarball ..."
-    sudo tar -C /usr/local -xvf go1.19.5.linux-amd64.tar.gz
-    # return to working directory
-    cd "$PWD" || return 1
+    aptInstall golang-go
 
     echoLog "spacer"
 }
@@ -47,17 +33,7 @@ go-config()
 {
     echoLog "spacer"
 
-    # write path to /etc/profile.d
-    echoLog "Writing GO Path to /etc/profile.d ..."
-    install -m 644 -g root -o root --backup=simple "$SK_INC/profile.d/go" /etc/profile.d/go.sh
-    # write path to /etc/environment
-    if ! grep -q "/usr/local/go/bin" /etc/environment; then
-        echoLog "Writing GO Path to /etc/environment ..."
-        while IFS= read -r line
-        do
-            [[ -n "$line" ]] && echo "$line" >> /etc/environment
-        done < "$SK_INC/environment/go"
-    fi
+    echoLog "No Config Requirement"
 
     echoLog "spacer"
 }
@@ -68,17 +44,7 @@ go-remove()
 {
     echoLog "spacer"
 
-    # remove go files
-    echoLog "Removing GO Files ..."
-    rm -Rf /usr/local/go
-    # remove from /etc/profile.d
-    echoLog "Removing GO from /etc/profile.d ..."
-    rm -f /etc/profile.d/go.sh
-    # remove from /etc/environment
-    echoLog "Removing GO from /etc/environment"
-    mv /etc/environment /etc/environment.bak
-    grep -v 'PATH=$PATH:/usr/local/go/bin' /etc/environment.bak > /etc/environment
-    chmod 0644 /etc/environment
+    aptRemove golang-go
 
     echoLog "spacer"
 }
